@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e872139d-f9ce-4c5a-8895-3a68f8ed68cf": {
+      "ProjectGuid": "e872139d-f9ce-4c5a-8895-3a68f8ed68cf",
+      "DisplayName": "QuestLog",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
