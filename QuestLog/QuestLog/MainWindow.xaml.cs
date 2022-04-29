@@ -35,6 +35,9 @@ namespace QuestLog
                         ////Lade die Menu-UserControl
                         //MainContent.Content = new Menu(this);
                         break;
+                    case ActWindow.DMView:
+                        MainContent.Content = new DMView().Content;
+                        break;
                 }
                 currWindow = value;
             }
@@ -49,8 +52,36 @@ namespace QuestLog
         //Register, Login, MainMenu, DMView, PlayerView
         public enum ActWindow
         {
-            Login
+            Register, Login, MainMenu, DMView, PlayerView
         }
         #endregion
+
+        #region toolbar functionality
+        public void ExitApplication(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
+        public void MaximizeApplication(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            else
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+        }
+        public void MinimizeApplication(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        public void Drag(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+        #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CurrWindow = ActWindow.DMView;
+        }
     }
 }

@@ -5,5 +5,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
+        <Color x:Key="Background">#FF121212</Color>
     </Application.Resources>
 </Application>

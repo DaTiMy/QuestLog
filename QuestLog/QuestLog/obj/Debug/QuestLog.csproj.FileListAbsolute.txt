@@ -14,5 +14,8 @@ C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.csp
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.csproj.CoreCompileInputs.cache
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.exe
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.pdb
-C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\Window1.g.cs
-C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\Window1.baml
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\PlayerView.g.cs
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\PlayerView.baml
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\DMView.g.cs
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.baml
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\DMView.baml

@@ -5,6 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuestLog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="450" ResizeMode="NoResize">
-    <Grid/>
+        Title="QuestLog" Height="620" Width="450" ResizeMode="NoResize" WindowStyle="None" Background="Transparent">
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource Background}"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Tool Bar -->
+        <Border Grid.ColumnSpan="2" Background="#181818"/>
+        <TextBlock Text="QuestLog" Foreground="DarkGray" VerticalAlignment="Center" Margin="15,0,0,0"/>
+        <Border Grid.ColumnSpan="2" Background="Transparent" MouseDown="Drag"/>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="20" Background="Transparent" Content="🗕" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MinimizeApplication"/>
+            <Button Width="20" Background="Transparent" Content="🗖" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MaximizeApplication"/>
+            <Button Width="20" Background="DarkRed" Content="✖" Foreground="#181818" BorderThickness="0" Click="ExitApplication" />
+        </StackPanel>
+
+        <ContentControl Grid.Row="1" x:Name="MainContent">
+            <Button Width="100" Height="30" Content="DMView" Click="Button_Click"></Button>
+        </ContentControl>
+    </Grid>
 </Window>
