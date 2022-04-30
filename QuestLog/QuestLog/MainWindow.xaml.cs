@@ -21,6 +21,7 @@ namespace QuestLog
     public partial class MainWindow : Window
     {
         private ActWindow currWindow;
+        private static readonly MainWindow instance = new MainWindow();
 
         public ActWindow CurrWindow
         {
@@ -36,11 +37,23 @@ namespace QuestLog
                         //MainContent.Content = new Menu(this);
                         break;
                     case ActWindow.DMView:
-                        MainContent.Content = new DMView().Content;
+                        MainContent.Content = new DMView();
                         break;
                 }
                 currWindow = value;
             }
+        }
+
+        public static MainWindow Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
+        static MainWindow()
+        {
         }
 
         public MainWindow()
@@ -48,6 +61,7 @@ namespace QuestLog
             InitializeComponent();
             CurrWindow = ActWindow.Login;
         }
+
         #region Enum ActWindow
         //Register, Login, MainMenu, DMView, PlayerView
         public enum ActWindow
@@ -56,7 +70,7 @@ namespace QuestLog
         }
         #endregion
 
-        #region toolbar functionality
+        #region Toolbar functionality
         public void ExitApplication(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Close();

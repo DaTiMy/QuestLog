@@ -17,14 +17,23 @@ namespace QuestLog
     /// <summary>
     /// Interaction logic for Window2.xaml
     /// </summary>
-    public partial class DMView : Window
+    public partial class DMView : UserControl
     {
+
         public DMView()
         {
             InitializeComponent();
+
+            DataContext = Enumerable.Range(1, 10)
+                        .Select(x => new QuestItem()
+                        {
+                            Nr = "Quest " + x
+                        });
+
+            
         }
 
-        #region toolbar functionality
+        #region Toolbar functionality
         public void ExitApplication(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Close();
@@ -43,7 +52,7 @@ namespace QuestLog
 
         public void Drag(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            MainWindow.Instance.DragMove();
         }
         #endregion
     }
