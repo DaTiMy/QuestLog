@@ -61,7 +61,8 @@
     <Compile Include="DMView.xaml.cs">
       <DependentUpon>DMView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="QuestItem.cs" />
+    <Compile Include="Quest.cs" />
+    <Compile Include="SubQuest.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

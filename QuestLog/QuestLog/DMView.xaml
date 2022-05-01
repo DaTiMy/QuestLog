@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuestLog"
+        xmlns:src="clr-namespace:QuestLog"
         mc:Ignorable="d"
         Height="600" Width="450">
     <UserControl.Resources>
@@ -14,8 +14,7 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Background}"/>
         </Grid.Background>
-
-        <ListView Width="400" Height="550" ItemsSource="{Binding}">
+        <ListView Width="400" Height="550" ItemsSource="{Binding}" ScrollViewer.CanContentScroll="False">
             <ListView.BorderBrush>
                 <SolidColorBrush Color="#FF333333"/>
             </ListView.BorderBrush>
@@ -24,19 +23,21 @@
             </ListView.Background>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TreeView Height="20" Width="386">
+                    <TreeView Width="386">
                         <TreeView.Background>
                             <SolidColorBrush Color="{DynamicResource GreyE2}"/>
                         </TreeView.Background>
                         <TreeView.Resources>
-                            <HierarchicalDataTemplate>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Foreground="White"/>
+                            <HierarchicalDataTemplate DataType="{x:Type src:Quest}" ItemsSource="{Binding Path=Subquests}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
                             </HierarchicalDataTemplate>
-                            <DataTemplate>
-
+                            <DataTemplate DataType="{x:Type src:SubQuest}">
+                                <TextBlock Text="{Binding Name}" Foreground="White"/>
                             </DataTemplate>
                         </TreeView.Resources>
-                        
+                        <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Subquests}" Foreground="White" FontFamily="Rockwell" FontSize="18"/>
                     </TreeView>
                 </DataTemplate>
             </ListView.ItemTemplate>

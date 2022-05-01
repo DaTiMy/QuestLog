@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace QuestLog
 {
-    internal class QuestItem
+    internal class SubQuest
     {
-        public string Nr { get; set; }
+        public string Name { get; set; }
 
+        public int Nr { get; set; }
     }
 }

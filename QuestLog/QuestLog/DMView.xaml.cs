@@ -20,17 +20,25 @@ namespace QuestLog
     public partial class DMView : UserControl
     {
 
+        object Quests = Enumerable.Range(1, 50)
+            .Select(x => new Quest()
+            {
+                Name = "Quest " + x,
+                Nr = x,
+                Subquests = Enumerable.Range(1, 8)
+                            .Select(y => new SubQuest()
+                            {
+                                Name = "SubQuest " + y,
+                                Nr = y
+                            }).ToList()
+
+            });
+
         public DMView()
         {
             InitializeComponent();
 
-            DataContext = Enumerable.Range(1, 10)
-                        .Select(x => new QuestItem()
-                        {
-                            Nr = "Quest " + x
-                        });
-
-            
+            DataContext = Quests;
         }
 
         #region Toolbar functionality
