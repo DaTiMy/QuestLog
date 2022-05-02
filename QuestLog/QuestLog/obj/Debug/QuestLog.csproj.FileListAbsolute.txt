@@ -41,3 +41,4 @@ C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.cs
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.exe
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.pdb
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\GeneratedInternalTypeHelper.g.cs

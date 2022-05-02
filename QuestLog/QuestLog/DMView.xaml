@@ -7,37 +7,81 @@
         mc:Ignorable="d"
         Height="600" Width="450">
     <UserControl.Resources>
+        <!--Local DynamicResource-->
         <Color x:Key="GreyE1">#FF181818</Color>
         <Color x:Key="GreyE2">#FF1C1C1C</Color>
+        <Color x:Key="BorderColor">#FFAAAAAA</Color>
+        <Style TargetType="TreeView"  >
+            <Style.Resources>
+                <!-- SelectedItem with focus -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                       Color="Transparent" />
+                <!-- SelectedItem without focus -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
+                       Color="Transparent" />
+                <!--SelectedItem when inactive and previously selected-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                       Color="Transparent" />
+                <!-- SelectedItem text foreground -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                       Color="White" />
+            </Style.Resources>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Background}"/>
         </Grid.Background>
-        <ListView Width="400" Height="550" ItemsSource="{Binding}" ScrollViewer.CanContentScroll="False">
-            <ListView.BorderBrush>
-                <SolidColorBrush Color="#FF333333"/>
-            </ListView.BorderBrush>
+        <ListView Width="400" Height="550" ItemsSource="{Binding}" ScrollViewer.CanContentScroll="False" Foreground="{x:Null}">
             <ListView.Background>
                 <SolidColorBrush Color="{DynamicResource GreyE1}"/>
             </ListView.Background>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TreeView Width="386">
+                    <TreeView ClipToBounds="True" VerticalAlignment="Center">
                         <TreeView.Background>
                             <SolidColorBrush Color="{DynamicResource GreyE2}"/>
                         </TreeView.Background>
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="Focusable" Value="False" />
+                            </Style>
+                        </TreeView.ItemContainerStyle>
                         <TreeView.Resources>
+                            <!--Element for Quests-->
                             <HierarchicalDataTemplate DataType="{x:Type src:Quest}" ItemsSource="{Binding Path=Subquests}">
                                 <StackPanel Orientation="Horizontal">
+                                    <CheckBox VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
                                     <TextBlock Text="{Binding Name}"/>
                                 </StackPanel>
                             </HierarchicalDataTemplate>
+                            <!--Element for Subquests-->
                             <DataTemplate DataType="{x:Type src:SubQuest}">
-                                <TextBlock Text="{Binding Name}" Foreground="White"/>
+                                <Border BorderThickness="1" Margin="2,2,2,2">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="#FFAAAAAA"/>
+                                    </Border.BorderBrush>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                        <TextBlock Text="{Binding Name}" Foreground="White" Width="278"  Padding="50, 2, 2, 2" FontSize="18"/>
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </TreeView.Resources>
-                        <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Subquests}" Foreground="White" FontFamily="Rockwell" FontSize="18"/>
+                        <!--Full list element-->
+                        <StackPanel Orientation="Horizontal">
+                            <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Subquests}" 
+                                      Foreground="White" FontFamily="Rockwell" FontSize="24" 
+                                      Width="344" ClipToBounds="True" BorderThickness="1,1,1,1"                                     
+                                      IsSelected="False" Focusable="False" Padding="30, 5, 5, 5">
+                            </TreeViewItem>
+                            <CheckBox Margin="-35, 5, 0, 0">
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="2" ScaleY="2" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </StackPanel>
                     </TreeView>
                 </DataTemplate>
             </ListView.ItemTemplate>
