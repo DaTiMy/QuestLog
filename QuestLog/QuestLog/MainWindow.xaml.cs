@@ -39,6 +39,9 @@ namespace QuestLog
                     case ActWindow.DMView:
                         MainContent.Content = new DMView();
                         break;
+                    case ActWindow.PlayerView:
+                        MainContent.Content = new PlayerView();
+                        break;
                 }
                 currWindow = value;
             }
@@ -107,9 +110,14 @@ namespace QuestLog
         }
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_ClickDM(object sender, RoutedEventArgs e)
         {
             CurrWindow = ActWindow.DMView;
+        }
+
+        private void Button_ClickPlayer(object sender, RoutedEventArgs e)
+        {
+            CurrWindow = ActWindow.PlayerView;
         }
     }
 }
