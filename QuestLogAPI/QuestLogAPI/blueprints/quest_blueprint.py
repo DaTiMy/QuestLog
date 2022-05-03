@@ -21,14 +21,24 @@ questSchema = {
   "required": ["Copper", "EXP", "Gold", "Name", "SID", "Silver"]
 }
 
+subQuestSchema = {
+
+    "properties": {
+        "Description": {"type": "string"},
+        "Name": {"type": "string"},
+        "QID": {"type": "integer"},
+    },
+  "required": ["Description", "Name", "QID"]
+}
+
 
 #routes
 
-@quest.route('/add', methods=['POST'])
-def add():
+@quest.route('/add/quest', methods=['POST'])
+def addQuest():
     content = request.json
 
-    isValidate = validateJson(content)
+    isValidate = validateQuestJson(content)
 
     if not isValidate:
         return quest.register_error_handler(400, handle_bad_request)
@@ -40,7 +50,33 @@ def add():
     con  = connection()
     cur = con.cursor()
     contentDict = contentDict[0]
-    cur.execute(sql,(contentDict['SID'], contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, 2))
+    cur.execute(sql,(contentDict['SID'], contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,contentDict['SID'])))
+    con.commit()
+    con.close()
+
+        
+    res = jsonify(success=True)
+    return res
+
+
+
+@quest.route('/add/subquest', methods=['POST'])
+def addSubQuest():
+    content = request.json
+
+    isValidate = validateSubQuestJson(content)
+
+    if not isValidate:
+        return quest.register_error_handler(400, handle_bad_request)
+   
+    contentDict = json.loads(request.data)
+
+    sql = """INSERT INTO SubGoal (qid,name,description,finish) VALUES (%s, %s, %s, %s)"""
+
+    con  = connection()
+    cur = con.cursor()
+    contentDict = contentDict[0]
+    cur.execute(sql,(contentDict['QID'], contentDict['Name'], contentDict['Description'],0))
     con.commit()
     con.close()
 
@@ -103,13 +139,14 @@ def select(QID):
 
 @quest.route('/select/sid/<SID>', methods=['GET'])
 def selectQSID(SID):
+    
     sql = """SELECT qid, name, exp, copper, silver, gold, finish, ordernumber FROM Quest WHERE sid = %s"""
     con  = connection()
     cur = con.cursor()
     cur.execute(sql,(SID,))
     results = cur.fetchall()
     insertObject = []
-
+  
     columnNames = [column[0] for column in cur.description]
     for record in results:
         temp = dict( zip( columnNames , record ))
@@ -154,12 +191,32 @@ def selectAll():
 
 
 
-def validateJson(jsonData):
+def validateQuestJson(jsonData):
     try:
         validate(instance=jsonData, schema=questSchema)
     except jsonschema.exceptions.ValidationError as err:
         return False
     return True
+
+def validateSubQuestJson(jsonData):
+    try:
+        validate(instance=jsonData, schema=subQuestSchema)
+    except jsonschema.exceptions.ValidationError as err:
+        return False
+    return True
+
+
+def setNewOrderNumber(con,SID):
+    sql = """SELECT ordernumber FROM Quest WHERE sid = %s"""
+    
+    cur = con.cursor()
+    cur.execute(sql,(SID,))
+    results = cur.fetchall()
+
+
+
+    return len(results)+1
+    
 
 
 def setOrderNumber(Arr):
@@ -184,3 +241,5 @@ def fetchSubQuests(con,QID):
         insertObject.append( dict( zip( columnNames , record ) ) )
  
     return insertObject
+
+
