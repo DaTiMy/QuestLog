@@ -52,7 +52,7 @@
                             <!--Element for Quests-->
                             <HierarchicalDataTemplate DataType="{x:Type src:Quest}" ItemsSource="{Binding Path=Subquests}">
                                 <StackPanel Orientation="Horizontal">
-                                    <CheckBox VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                    <CheckBox x:Name="CheckQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
                                     <TextBlock Text="{Binding Name}"/>
                                 </StackPanel>
                             </HierarchicalDataTemplate>
@@ -63,15 +63,15 @@
                                         <SolidColorBrush Color="#FFAAAAAA"/>
                                     </Border.BorderBrush>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
-                                        <TextBlock Text="{Binding Name}" Foreground="White" Width="278"  Padding="50, 2, 2, 2" FontSize="18"/>
+                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                        <TextBlock Text="{Binding Name}" Foreground="White" Width="275"  Padding="50, 2, 2, 2" FontSize="18"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </TreeView.Resources>
                         <!--Full list element-->
                         <StackPanel Orientation="Horizontal">
-                            <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Subquests}" 
+                            <TreeViewItem x:Name="TreeElementQuest" Header="{Binding Name}" ItemsSource="{Binding Subquests}" 
                                       Foreground="White" FontFamily="Rockwell" FontSize="24" 
                                       Width="344" ClipToBounds="True" BorderThickness="1,1,1,1"                                     
                                       IsSelected="False" Focusable="False" Padding="30, 5, 5, 5">
@@ -81,6 +81,41 @@
                                     <ScaleTransform ScaleX="2" ScaleY="2" />
                                 </CheckBox.LayoutTransform>
                             </CheckBox>
+                        </StackPanel>
+                        <StackPanel Margin="5, 4, 0, 4" Width="334">
+                            <Border BorderThickness="1" Padding="2">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="#FFAAAAAA"/>
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="EXP: " TextAlignment="Left" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TextEXP" Text="{Binding EXP}" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="1" HorizontalAlignment="Left" FontStyle="Italic"/>
+                                    <TextBlock Text="Gold: " TextAlignment="Left" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="2" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TextGold" Text="{Binding Gold}" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="3" HorizontalAlignment="Left" FontStyle="Italic"/>
+                                    <TextBlock Text="Silver: " TextAlignment="Left" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="4" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TextSilver" Text="{Binding Silver}" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="5" HorizontalAlignment="Left" FontStyle="Italic"/>
+                                    <TextBlock Text="Copper: " TextAlignment="Left" FontFamily="Rockwell" FontSize="10"
+                                       Foreground="White" Grid.Column="6" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TextCopper" Text="{Binding Copper}" FontFamily="Rockwell"
+                                       Foreground="White" Grid.Column="7" HorizontalAlignment="Center" FontStyle="Italic"/>
+                                </Grid>
+                            </Border>
                         </StackPanel>
                     </TreeView>
                 </DataTemplate>
