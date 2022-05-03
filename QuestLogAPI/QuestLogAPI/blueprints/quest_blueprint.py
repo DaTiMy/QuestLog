@@ -32,7 +32,7 @@ subQuestSchema = {
 }
 
 
-#routes
+#region routes
 
 @quest.route('/add/quest', methods=['POST'])
 def addQuest():
@@ -83,6 +83,43 @@ def addSubQuest():
         
     res = jsonify(success=True)
     return res
+
+
+@quest.route('/delete/quest/<QID>', methods=['DELETE'])
+def deleteQuest(QID):
+
+
+    sql = """DELETE FROM Quest WHERE qid = %s"""
+
+    con  = connection()
+    cur = con.cursor()
+    cur.execute(sql,(QID,))
+    con.commit()
+    con.close()
+
+        
+    res = jsonify(success=True)
+    return res
+
+
+
+@quest.route('/delete/subquest/<SGID>', methods=['DELETE'])
+def deleteSubQuest(SGID):
+
+
+    sql = """DELETE FROM SubGoal WHERE sgid = %s"""
+
+    con  = connection()
+    cur = con.cursor()
+    cur.execute(sql,(SGID,))
+    con.commit()
+    con.close()
+
+        
+    res = jsonify(success=True)
+    return res
+
+
 
 
 
@@ -181,12 +218,14 @@ def selectAll():
     return jsonify(insertObject)
 
 
+@quest.route('/finish/quest/<QID>', methods=['GET'])
+def finishQuest():
+    sql = 
 
 
 
 
-
-#functions
+#endregion
 
 
 
