@@ -218,11 +218,47 @@ def selectAll():
     return jsonify(insertObject)
 
 
-@quest.route('/finish/quest/<QID>', methods=['GET'])
-def finishQuest():
-    sql = 
+@quest.route('/finish/quest/<QID>', methods=['PATCH'])
+def finishQuest(QID):
+    sql = """SELECT finish FROM Quest WHERE qid = %s"""
+    con  = connection()
+    cur = con.cursor()
+    cur.execute(sql,(QID,))
+    results = cur.fetchall()
+    
+    if results[0][0] == 0:
+        sql = """UPDATE Quest SET finish = 1 WHERE qid = %s"""
+    else:
+        sql = """UPDATE Quest SET finish = 0 WHERE qid = %s"""
+    cur.execute(sql,(QID,))
+    con.commit()
+    con.close()
 
+    res = jsonify(success=True)
+    res.status_code = 200
 
+    return res
+
+@quest.route('/finish/subquest/<SGID>', methods=['PATCH'])
+def finishSubQuest(SGID):
+    sql = """SELECT finish FROM SubGoal WHERE sgid = %s"""
+    con  = connection()
+    cur = con.cursor()
+    cur.execute(sql,(SGID,))
+    results = cur.fetchall()
+    
+    if results[0][0] == 0:
+        sql = """UPDATE SubGoal SET finish = 1 WHERE sgid = %s"""
+    else:
+        sql = """UPDATE SubGoal SET finish = 0 WHERE sgid = %s"""
+    cur.execute(sql,(SGID,))
+    con.commit()
+    con.close()
+
+    res = jsonify(success=True)
+    res.status_code = 200
+
+    return res
 
 
 #endregion
