@@ -24,7 +24,7 @@ namespace QuestLog
             .Select(x => new Quest()
             {
                 Name = "Quest " + x,
-                Nr = x,
+                OrderNumber = x,
                 Subquests = Enumerable.Range(1, 8)
                             .Select(y => new SubQuest()
                             {

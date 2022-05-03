@@ -42,3 +42,6 @@ C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.ex
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.pdb
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\Newtonsoft.Json.dll
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\Newtonsoft.Json.xml
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.csproj.CopyComplete

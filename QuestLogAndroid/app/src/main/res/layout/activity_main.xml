@@ -31,20 +31,20 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordTextInputLayout"
+            android:id="@+id/userTextInputLayout"
             style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/password"
+            android:hint="@string/username"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/BorderColor"
             app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
+                android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/GrayE1"
@@ -54,38 +54,45 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userTextInputLayout"
+            android:id="@+id/passwordTextInputLayout"
             style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/username"
+            android:hint="@string/password"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/BorderColor"
             app:hintTextColor="@color/white"
-
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_eyecon"
+            app:endIconTint="@color/white"
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userName"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/GrayE1"
                 android:textColor="@color/white"
-                android:textCursorDrawable="@null" />
+                android:inputType="textPassword"
+                android:textCursorDrawable="@null"
+
+                />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/GrayE1"
+        android:background="@drawable/filled_round_button"
         android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:theme="@android:style/ThemeOverlay.Material.Dark"
         android:text="@string/login"
         android:textAllCaps="true"
         android:textColor="@color/white"
@@ -95,19 +102,20 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:minHeight="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_square"
-        android:backgroundTint="@color/GrayE1"
         android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:theme="@android:style/ThemeOverlay.Material.Dark"
         android:text="@string/register"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="11sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/login" />

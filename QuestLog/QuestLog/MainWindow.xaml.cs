@@ -68,7 +68,7 @@ namespace QuestLog
             .Select(x => new Quest()
             {
                 Name = "Quest " + x,
-                Nr = x,
+                OrderNumber = x,
                 Subquests = Enumerable.Range(1, 3)
                             .Select(y => new SubQuest()
                             {
@@ -77,6 +77,8 @@ namespace QuestLog
                             }).ToList()
 
             });
+
+            Connection.GetQuestListTEST(1);
         }
 
         #region Enum ActWindow
