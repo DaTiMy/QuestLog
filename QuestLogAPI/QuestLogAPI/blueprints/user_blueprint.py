@@ -104,7 +104,7 @@ def hashPassword(passw):
 
 def validateRegisterJson(jsonData):
     try:
-        validate(instance=jsonData, schema=questSchema)
+        validate(instance=jsonData, schema=userSchema)
     except jsonschema.exceptions.ValidationError as err:
         return False
     return True
