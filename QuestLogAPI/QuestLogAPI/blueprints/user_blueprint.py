@@ -82,7 +82,7 @@ def insert_register():
     con = connection()
     cur = con.cursor()
     sql = """INSERT INTO User (Name, Email, Username, Password, Slots) VALUE (%s, %s, %s, %s)"""
-    cur.execute(sql,(contentDict['Name'], contentDict['Email'] contentDict['Username'], hashed, 3))
+    cur.execute(sql,(contentDict['Name'], contentDict['Email'], contentDict['Username'], hashed, 3))
     con.commit()
     cur.close()
     con.close()
