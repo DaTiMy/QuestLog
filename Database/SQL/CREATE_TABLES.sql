@@ -9,6 +9,7 @@ DROP TABLE User;
 CREATE TABLE User(
 UID int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 Name char(25),
+Email char(50),
 Username char(25),
 Password char(60),
 Slots int,

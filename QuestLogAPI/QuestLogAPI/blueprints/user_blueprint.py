@@ -15,10 +15,11 @@ userSchema = {
     "properties": {
         "Email": {"type": "integer"},
         "Name": {"type": "string"},
-        "Password": {"type": "string"}
+        "Password": {"type": "string"},
+        "Username":{"type": "string"}
         
     },
-  "required": ["Email", "Name", "Password"]
+  "required": ["Email", "Name", "Password", "Username"]
 }
 
 
@@ -80,14 +81,15 @@ def insert_register():
 
     con = connection()
     cur = con.cursor()
-    sql = """INSERT INTO User (Name, Username, Password, Slots) VALUE (%s, %s, %s, %s)"""
-    cur.execute(sql,(contentDict['Name'], contentDict['Username'], hashed, 3))
+    sql = """INSERT INTO User (Name, Email, Username, Password, Slots) VALUE (%s, %s, %s, %s)"""
+    cur.execute(sql,(contentDict['Name'], contentDict['Email'] contentDict['Username'], hashed, 3))
     con.commit()
     cur.close()
     con.close()
 
+    res = jsonify(success=True)
+    return res
 
-    return "Success"
 
 
 
