@@ -76,12 +76,23 @@ def insert_register():
         return quest.register_error_handler(400, handle_bad_request)
 
     contentDict = json.loads(request.data)
+    contentDict = contentDict[0]
 
-    hashed = hashPassword(contentDict['Password'])
+
 
     con = connection()
     cur = con.cursor()
-    sql = """INSERT INTO User (Name, Email, Username, Password, Slots) VALUE (%s, %s, %s, %s)"""
+
+    sql = """SELECT Username FROM User WHERE Username = %s"""
+    cur.execute(sql,(contentDict['Username'],))
+    result = cur.fetchall()
+
+    if len(result) > 0:
+        return "User already exists!"
+
+
+    sql = """INSERT INTO User (Name, Email, Username, Password, Slots) VALUE (%s, %s, %s, %s, %s)"""
+    hashed = hashPassword(contentDict['Password'])
     cur.execute(sql,(contentDict['Name'], contentDict['Email'], contentDict['Username'], hashed, 3))
     con.commit()
     cur.close()
@@ -96,7 +107,7 @@ def insert_register():
 #functions
 def hashPassword(passw):
     salt = bcrypt.gensalt()
-    hashed = bcrypt.hashpw(passw, salt)
+    hashed = bcrypt.hashpw(passw.encode('utf8'), salt)
 
     return hashed
 
