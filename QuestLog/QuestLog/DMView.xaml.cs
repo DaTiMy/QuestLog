@@ -28,8 +28,7 @@ namespace QuestLog
                 Subquests = Enumerable.Range(1, 8)
                             .Select(y => new SubQuest()
                             {
-                                Name = "SubQuest " + y,
-                                Nr = y
+                                Name = "SubQuest " + y
                             }).ToList()
 
             });
@@ -38,7 +37,8 @@ namespace QuestLog
         {
             InitializeComponent();
 
-            DataContext = Quests;
+            object Q = Connection.GetQuestList(2);
+            DataContext = Connection.GetQuestList(2);
         }
 
         #region Toolbar functionality

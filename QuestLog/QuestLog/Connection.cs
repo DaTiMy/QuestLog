@@ -13,38 +13,25 @@ namespace QuestLog
         public static List<Quest> GetQuestList(int SID)
         {
             string json = "";
-            List<Quest> q = new List<Quest>();
 
             using (WebClient wc = new WebClient())
             {
-                json = wc.DownloadString("http://172.16.47.13:5000/quests/select/sid/" + SID);
+                json = wc.DownloadString("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/select/sid/" + SID);
             }
 
-            
-
-            return q;
-        }
-
-        public static List<Quest> GetQuestListTEST(int SID)
-        {
-            List<Quest> quests = Enumerable.Range(1, 3)
-            .Select(x => new Quest()
-            {
-                Name = "Quest " + x,
-                OrderNumber = x,
-                EXP = 100,
-                Subquests = Enumerable.Range(1, 2)
-                            .Select(y => new SubQuest()
-                            {
-                                Name = "SubQuest " + y,
-                                Nr = y
-                            }).ToList()
-            }).ToList();
-
-            string json = JsonConvert.SerializeObject(quests, Formatting.Indented);
+            List<Quest> quests = JsonConvert.DeserializeObject<List<Quest>>(json);
 
             return quests;
+        }
 
+        public static void FinishQuest(int QID)
+        {
+            //Patch request here
+        }
+
+        public static void FinishSubQuest(int SQID)
+        {
+            //Patch request here
         }
     }
 }

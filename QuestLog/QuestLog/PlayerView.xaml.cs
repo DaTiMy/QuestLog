@@ -20,24 +20,14 @@ namespace QuestLog
     /// </summary>
     public partial class PlayerView : UserControl
     {
-        object Quests = Enumerable.Range(1, 50)
-        .Select(x => new Quest()
-        {
-            Name = "Quest " + x,
-            OrderNumber = x,
-            EXP = 100,
-            Subquests = Enumerable.Range(1, 8)
-                        .Select(y => new SubQuest()
-                        {
-                            Name = "SubQuest " + y,
-                            Nr = y
-                        }).ToList()
+        public List<Quest> Quests { get; set; }
 
-        });
 
         public PlayerView()
         {
             InitializeComponent();
+
+            Quests = Connection.GetQuestList(2);
 
             DataContext = Quests;
         }
@@ -64,5 +54,17 @@ namespace QuestLog
             MainWindow.Instance.DragMove();
         }
         #endregion
+
+        public void CheckedQuest(object sender, RoutedEventArgs e)
+        {
+            int qid = ((sender as CheckBox).DataContext as Quest).QID;
+            Connection.FinishQuest(qid);
+        }
+
+        public void CheckedSubQuest(object sender, RoutedEventArgs e)
+        {
+            int sqid = ((sender as CheckBox).DataContext as SubQuest).SQID;
+            Connection.FinishSubQuest(sqid);
+        }
     }
 }

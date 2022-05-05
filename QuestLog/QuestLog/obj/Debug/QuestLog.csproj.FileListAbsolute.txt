@@ -45,3 +45,6 @@ C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\GeneratedInt
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\Newtonsoft.Json.dll
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\Newtonsoft.Json.xml
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.csproj.CopyComplete
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\Newtonsoft.Json.dll
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\Newtonsoft.Json.xml
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\QuestLog.csproj.CopyComplete

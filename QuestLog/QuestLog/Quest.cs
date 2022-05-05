@@ -9,7 +9,7 @@ namespace QuestLog
 {   
     [Serializable]
 
-    internal class Quest
+    public class Quest
     {
         [JsonProperty("copper")]
         public int Copper { get; set; }
