@@ -47,6 +47,8 @@ namespace QuestLog
             }
         }
 
+        public int SID { get; set; }
+
         public static MainWindow Instance
         {
             get
@@ -63,22 +65,6 @@ namespace QuestLog
         {
             InitializeComponent();
             CurrWindow = ActWindow.Login;
-
-            DataContext = Enumerable.Range(1, 10)
-            .Select(x => new Quest()
-            {
-                Name = "Quest " + x,
-                OrderNumber = x,
-                Subquests = Enumerable.Range(1, 3)
-                            .Select(y => new SubQuest()
-                            {
-                                Name = "SubQuest " + y,
-                                Nr = y
-                            }).ToList()
-
-            });
-
-            Connection.GetQuestListTEST(1);
         }
 
         #region Enum ActWindow

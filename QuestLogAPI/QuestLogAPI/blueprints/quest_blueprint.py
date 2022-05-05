@@ -52,6 +52,7 @@ def addQuest():
     contentDict = contentDict[0]
     cur.execute(sql,(contentDict['SID'], contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,contentDict['SID'])))
     con.commit()
+    cur.close()
     con.close()
 
         
@@ -78,6 +79,7 @@ def addSubQuest():
     contentDict = contentDict[0]
     cur.execute(sql,(contentDict['QID'], contentDict['Name'], contentDict['Description'],0))
     con.commit()
+    cur.close()
     con.close()
 
         
@@ -95,6 +97,7 @@ def deleteQuest(QID):
     cur = con.cursor()
     cur.execute(sql,(QID,))
     con.commit()
+    cur.close()
     con.close()
 
         
@@ -113,6 +116,7 @@ def deleteSubQuest(SGID):
     cur = con.cursor()
     cur.execute(sql,(SGID,))
     con.commit()
+    cur.close()
     con.close()
 
         
@@ -144,7 +148,7 @@ def sort(SID):
     for key in insertDict.keys():
         cur.execute(sql,(insertDict[key],key))
         con.commit()
-      
+    cur.close()      
     con.close()
 
 
@@ -167,7 +171,8 @@ def select(QID):
     columnNames = [column[0] for column in cur.description]
     for record in results:
         insertObject.append( dict( zip( columnNames , record ) ) )
- 
+    
+    cur.close()
     con.close()
  
     return jsonify(insertObject)
@@ -191,7 +196,7 @@ def selectQSID(SID):
         
         insertObject.append(temp )
       
-       
+    cur.close()      
     con.close()
     
     return jsonify(insertObject)
@@ -213,6 +218,7 @@ def selectAll():
        
         insertObject.append( dict( zip( columnNames , record ) ) )
  
+    cur.close()
     con.close()
  
     return jsonify(insertObject)
@@ -232,6 +238,7 @@ def finishQuest(QID):
         sql = """UPDATE Quest SET finish = 0 WHERE qid = %s"""
     cur.execute(sql,(QID,))
     con.commit()
+    cur.close()
     con.close()
 
     res = jsonify(success=True)
@@ -253,6 +260,7 @@ def finishSubQuest(SGID):
         sql = """UPDATE SubGoal SET finish = 0 WHERE sgid = %s"""
     cur.execute(sql,(SGID,))
     con.commit()
+    cur.close()
     con.close()
 
     res = jsonify(success=True)

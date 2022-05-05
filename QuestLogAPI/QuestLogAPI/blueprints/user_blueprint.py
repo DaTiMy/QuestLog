@@ -1,9 +1,26 @@
 from typing import Tuple
-from flask import Blueprint, Response, Request, jsonify
+from flask import Blueprint, Response, Request, jsonify, request
 from connect.connect import connection
 import collections
+import jsonschema
+import json
+from jsonschema import validate
+import bcrypt
 
 user = Blueprint('user', __name__, url_prefix='/users')
+
+
+userSchema = {
+
+    "properties": {
+        "Email": {"type": "integer"},
+        "Name": {"type": "string"},
+        "Password": {"type": "string"},
+        "Username":{"type": "string"}
+        
+    },
+  "required": ["Email", "Name", "Password", "Username"]
+}
 
 
 
@@ -40,7 +57,7 @@ def get_userdata(username):
 
    
    
- 
+    cur.close()
     con.close()
 
     return jsonify(insertObject)
@@ -51,4 +68,54 @@ def get_userdata(username):
 @user.route('/register', methods=['POST'])
 def insert_register():
 
-    return "Success"
+    content = request.json
+
+    isValidate = validateRegisterJson(content)
+
+    if not isValidate:
+        return quest.register_error_handler(400, handle_bad_request)
+
+    contentDict = json.loads(request.data)
+    contentDict = contentDict[0]
+
+
+
+    con = connection()
+    cur = con.cursor()
+
+    sql = """SELECT Username FROM User WHERE Username = %s"""
+    cur.execute(sql,(contentDict['Username'],))
+    result = cur.fetchall()
+
+    if len(result) > 0:
+        return "User already exists!"
+
+
+    sql = """INSERT INTO User (Name, Email, Username, Password, Slots) VALUE (%s, %s, %s, %s, %s)"""
+    hashed = hashPassword(contentDict['Password'])
+    cur.execute(sql,(contentDict['Name'], contentDict['Email'], contentDict['Username'], hashed, 3))
+    con.commit()
+    cur.close()
+    con.close()
+
+    res = jsonify(success=True)
+    return res
+
+
+
+
+#functions
+def hashPassword(passw):
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(passw.encode('utf8'), salt)
+
+    return hashed
+
+
+
+def validateRegisterJson(jsonData):
+    try:
+        validate(instance=jsonData, schema=userSchema)
+    except jsonschema.exceptions.ValidationError as err:
+        return False
+    return True
