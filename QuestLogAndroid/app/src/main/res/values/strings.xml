@@ -4,4 +4,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+        <Style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.ALert">
+            <item name="android:background">@color/background</item>
+        </Style>
 </resources>

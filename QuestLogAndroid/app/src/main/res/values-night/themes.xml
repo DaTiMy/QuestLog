@@ -13,4 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/Background</item>
         <!-- Customize your theme here. -->
     </style>
+    <Style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.ALert">
+        <item name="android:background">@color/background</item>
+    </Style>
 </resources>
