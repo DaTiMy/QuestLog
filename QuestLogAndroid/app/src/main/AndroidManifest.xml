@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Questlog">
         <activity
+            android:name=".EditSubquest"
+            android:exported="false" />
+        <activity
+            android:name=".EditQuest"
+            android:exported="false" />
+        <activity
             android:name=".QuestSelection"
             android:exported="false" />
         <activity

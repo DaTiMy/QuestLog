@@ -4,4 +4,12 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="copper">Copper</string>
+    <string name="silver">Silver</string>
+    <string name="gold">Gold</string>
+    <string name="exp">EXP</string>
+    <string name="quest_name">Name</string>
+    <string name="save_quest">Save</string>
+    <string name="subquest_name">Subquest Name</string>
+    <string name="subquest_description"></string>
 </resources>

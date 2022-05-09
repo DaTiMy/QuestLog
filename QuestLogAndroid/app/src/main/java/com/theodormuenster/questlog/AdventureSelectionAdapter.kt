@@ -29,7 +29,7 @@ class AdventureSelectionAdapter(private val AdventureList: ArrayList<AdventureDa
         viewType: Int,
     ): AdventureSelectionViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.campaign_element,parent,false)
-        return AdventureSelectionViewHolder(itemView,onItemClick    )
+        return AdventureSelectionViewHolder(itemView,onItemClick)
     }
 
     override fun onBindViewHolder(holder: AdventureSelectionViewHolder, position: Int) {

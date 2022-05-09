@@ -49,6 +49,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/GrayE1"
                 android:textColor="@color/white"
+                android:inputType="text"
+                android:maxLines="1"
                 android:textCursorDrawable="@null" />
 
         </com.google.android.material.textfield.TextInputLayout>
