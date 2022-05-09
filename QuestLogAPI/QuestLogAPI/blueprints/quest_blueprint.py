@@ -269,6 +269,63 @@ def finishSubQuest(SGID):
     return res
 
 
+@quest.route('/update/quest/<QID>', methods=['PATCH'])
+def updateQuest(QID):
+
+    counter = 0
+    sql = """UPDATE Quest SET """
+    contentDict = json.loads(request.data)
+    contentDict = contentDict[0]
+    #Null checks
+    if "Name" in contentDict:
+        sql+= "Name=" + contentDict['Name']
+        counter+=1
+    if "EXP" in contentDict:
+        if counter > 0:
+            sql+= ", EXP=" + contentDict['EXP']
+        else:
+            sql+= "EXP=" + contentDict['EXP']
+        counter+=1
+    if "Copper" in contentDict:
+        if counter > 0:
+            sql+= ", Copper=" + contentDict['Copper']
+        else:
+            sql+= "Copper=" + contentDict['Copper']
+        counter+=1
+    if "Silver" in contentDict:
+        if counter > 0:
+            sql+= ", Silver=" + contentDict['Silver']
+        else:
+            sql+= "Silver=" + contentDict['Silver']
+        counter+=1
+    if "Gold" in contentDict:
+        if counter > 0:
+            sql+= ", Gold=" + contentDict['Gold']
+        else:
+            sql+= "Gold=" + contentDict['Gold']
+        counter+=1
+    if counter < 1:
+        res = jsonify(success=False)
+        res.status_code = 400
+
+        return res
+
+    sql += " WHERE qid=%s"
+
+    
+    con  = connection()
+    cur = con.cursor()
+    cur.execute(sql,(QID,))
+    con.commit()
+    cur.close()
+    con.close()
+
+    res = jsonify(success=True)
+    res.status_code = 200
+
+    return res
+
+
 #endregion
 
 
@@ -296,7 +353,7 @@ def setNewOrderNumber(con,SID):
     cur.execute(sql,(SID,))
     results = cur.fetchall()
 
-
+    cur.close()
 
     return len(results)+1
     

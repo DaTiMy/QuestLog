@@ -1,5 +1,6 @@
 from typing import Tuple
 from flask import Blueprint, Response, Request, jsonify, request
+from flask_httpauth import HTTPBasicAuth
 from connect.connect import connection
 import collections
 import jsonschema
@@ -8,7 +9,7 @@ from jsonschema import validate
 import bcrypt
 
 user = Blueprint('user', __name__, url_prefix='/users')
-
+auth = HTTPBasicAuth()
 
 userSchema = {
 
@@ -21,7 +22,16 @@ userSchema = {
     },
   "required": ["Email", "Name", "Password", "Username"]
 }
+loginSchema = {
 
+    "properties": {
+        "Email": {"type": "integer"},
+        "Password": {"type": "string"},
+        "Username":{"type": "string"}
+        
+    },
+  "required": [ "Password"]
+}
 
 
 @user.route('/userlist', methods=['GET', 'POST'])
@@ -73,7 +83,7 @@ def insert_register():
     isValidate = validateRegisterJson(content)
 
     if not isValidate:
-        return quest.register_error_handler(400, handle_bad_request)
+        return user.register_error_handler(400, handle_bad_request)
 
     contentDict = json.loads(request.data)
     contentDict = contentDict[0]
@@ -83,12 +93,12 @@ def insert_register():
     con = connection()
     cur = con.cursor()
 
-    sql = """SELECT Username FROM User WHERE Username = %s"""
-    cur.execute(sql,(contentDict['Username'],))
+    sql = """SELECT Username FROM User WHERE Username = %s OR Email = %s"""
+    cur.execute(sql,(contentDict['Username'],contentDict['Email']))
     result = cur.fetchall()
 
     if len(result) > 0:
-        return "User already exists!"
+        return "User or Email already exists!"
 
 
     sql = """INSERT INTO User (Name, Email, Username, Password, Slots) VALUE (%s, %s, %s, %s, %s)"""
@@ -102,9 +112,83 @@ def insert_register():
     return res
 
 
+@user.route('/login', methods=['POST'])
+def login():
+    content = request.json
+
+    isValidate = validateLoginJson(content)
+    if not isValidate:
+        return user.register_error_handler(400, handle_bad_request)
+
+    contentDict = json.loads(request.data)
+    contentDict = contentDict[0]
+    con = connection()
+    if 'Username' in contentDict:
+        user = contentDict['Username']
+    else:
+        user = None
+
+    if 'Email' in contentDict:
+        email = contentDict['Email']
+    else:
+        email = None
+
+
+    exists = verify_user(con, user, email)
+    if not exists:
+        con.close()
+        return "User or Email doesn't exists!"
+    sql = """SELECT Password FROM User WHERE Username = %s OR Email = %s"""
+    cur = con.cursor()
+    cur.execute(sql,(user,email))
+    result = cur.fetchall()
+    #tuple
+    result = result[0][0]
+    if not bcrypt.checkpw(contentDict['Password'].encode('utf-8'),result.encode('utf-8')):
+        cur.close()
+        con.close()
+        return "Wrong Password!"
+    sql = """UPDATE User SET SessionToken = %s WHERE Username = %s OR Email = %s"""
+    token = ""
+    if user is not None:
+        token = user + "ToKeN"
+    if email is not None:
+        token = email + "ToKeN"
+
+    cur.execute(sql,(token,user,email))
+    con.commit()
+    cur.close()
+    con.close()
+
+
+    res = jsonify(success=True)
+    return res
+
+
+
 
 
 #functions
+
+
+
+
+def verify_user(con, user = None, email = None):
+    cur = con.cursor()
+
+    sql = """SELECT Username FROM User WHERE Username = %s OR Email = %s"""
+    cur.execute(sql,(user,email))
+    result = cur.fetchall()
+    cur.close()
+    if len(result) < 1:
+        return False
+
+    return True
+
+
+
+
+
 def hashPassword(passw):
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(passw.encode('utf8'), salt)
@@ -116,6 +200,14 @@ def hashPassword(passw):
 def validateRegisterJson(jsonData):
     try:
         validate(instance=jsonData, schema=userSchema)
+    except jsonschema.exceptions.ValidationError as err:
+        return False
+    return True
+
+
+def validateLoginJson(jsonData):
+    try:
+        validate(instance=jsonData, schema=loginSchema)
     except jsonschema.exceptions.ValidationError as err:
         return False
     return True
