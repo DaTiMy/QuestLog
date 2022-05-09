@@ -27,7 +27,7 @@ namespace QuestLog
         {
             InitializeComponent();
 
-            Quests = Connection.GetQuestList(2);
+            Quests = Connection.GetQuestList(1);
 
             DataContext = Quests;
         }
@@ -58,6 +58,24 @@ namespace QuestLog
         public void CheckedQuest(object sender, RoutedEventArgs e)
         {
             int qid = ((sender as CheckBox).DataContext as Quest).QID;
+            object header = (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header;
+
+            if((sender as CheckBox).IsChecked == true)
+            {
+                TextBlock text = new TextBlock();
+                text.Text = (header as TextBlock).Text;
+                text.TextDecorations = TextDecorations.Strikethrough;
+                (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
+            }
+            else
+            {
+                TextBlock text = new TextBlock();
+                text.Text = (header as TextBlock).Text;
+                text.TextDecorations = null;
+                (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
+            }
+
+
             Connection.FinishQuest(qid);
         }
 
