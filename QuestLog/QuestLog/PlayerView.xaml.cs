@@ -63,9 +63,20 @@ namespace QuestLog
             if((sender as CheckBox).IsChecked == true)
             {
                 TextBlock text = new TextBlock();
-                text.Text = (header as TextBlock).Text;
-                text.TextDecorations = TextDecorations.Strikethrough;
-                (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
+
+                if(header is TextBlock)
+                {
+                    text.Text = (header as TextBlock).Text;
+                    text.TextDecorations = TextDecorations.Strikethrough;
+                    (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
+                }
+                else if(header is string)
+                {
+                    string questtext = header.ToString();
+                    text.Text = questtext;
+                    text.TextDecorations = TextDecorations.Strikethrough;
+                    (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
+                }
             }
             else
             {
