@@ -51,6 +51,7 @@ QID int UNSIGNED,
 Name char(50),
 Description char(255),
 Finish boolean,
+OrderNumber int,
 FOREIGN KEY (QID) REFERENCES Quest(QID) ON DELETE CASCADE
 );
 

@@ -72,12 +72,12 @@ def addSubQuest():
    
     contentDict = json.loads(request.data)
 
-    sql = """INSERT INTO SubGoal (qid,name,description,finish) VALUES (%s, %s, %s, %s)"""
+    sql = """INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (%s, %s, %s, %s, %s)"""
 
     con  = connection()
     cur = con.cursor()
     contentDict = contentDict[0]
-    cur.execute(sql,(contentDict['QID'], contentDict['Name'], contentDict['Description'],0))
+    cur.execute(sql,(contentDict['QID'], contentDict['Name'], contentDict['Description'],0, setNewSubOrderNumber(con,contentDict['QID'])))
     con.commit()
     cur.close()
     con.close()
@@ -89,14 +89,25 @@ def addSubQuest():
 
 @quest.route('/delete/quest/<QID>', methods=['DELETE'])
 def deleteQuest(QID):
+    con  = connection()
+    cur = con.cursor()
+    sql = """SELECT sid,ordernumber FROM Quest WHERE qid = %s"""
 
+    cur.execute(sql,(QID,))
+    result = cur.fetchall()
+
+    result = result[0]
+
+   
 
     sql = """DELETE FROM Quest WHERE qid = %s"""
 
-    con  = connection()
-    cur = con.cursor()
+
     cur.execute(sql,(QID,))
     con.commit()
+
+    rearrangeQuestOrder(con,result[0],result[1])
+
     cur.close()
     con.close()
 
@@ -108,14 +119,23 @@ def deleteQuest(QID):
 
 @quest.route('/delete/subquest/<SGID>', methods=['DELETE'])
 def deleteSubQuest(SGID):
+    con  = connection()
+    cur = con.cursor()
+    sql = """SELECT qid,ordernumber FROM SubGoal WHERE sqid = %s"""
+
+    cur.execute(sql,(QID,))
+    result = cur.fetchall()
+
+    result = result[0]
 
 
     sql = """DELETE FROM SubGoal WHERE sgid = %s"""
 
-    con  = connection()
-    cur = con.cursor()
     cur.execute(sql,(SGID,))
     con.commit()
+
+    rearrangeSubQuestOrder(con,result[0],result[1])
+
     cur.close()
     con.close()
 
@@ -127,8 +147,8 @@ def deleteSubQuest(SGID):
 
 
 
-@quest.route('/sort/<SID>', methods=['GET'])
-def sort(SID):
+@quest.route('/sort/quest/<SID>', methods=['GET'])
+def sortQuests(SID):
     content = request.data
     contentArr = content.decode().split(',')
     sql = """SELECT qid FROM Quest WHERE sid = %s ORDER BY qid"""
@@ -156,6 +176,34 @@ def sort(SID):
     res.status_code = 200
     return res
 
+@quest.route('/sort/subquest/<QID>', methods=['GET'])
+def sortSubQuests(QID):
+    content = request.data
+    contentArr = content.decode().split(',')
+    sql = """SELECT sgid FROM SubGoal WHERE qid = %s ORDER BY sgid"""
+    con = connection()
+    cur = con.cursor()
+    cur.execute(sql,(QID,))
+    result = [item[0] for item in cur.fetchall()]
+    
+    insertDict = {}
+    counter = 0
+
+    for element in result:
+        insertDict[element] = contentArr[counter]  
+        counter+=1
+    sql = """UPDATE SubGoal SET ordernumber = %s WHERE sgid = %s"""
+    
+    for key in insertDict.keys():
+        cur.execute(sql,(insertDict[key],key))
+        con.commit()
+    cur.close()      
+    con.close()
+
+
+    res = jsonify(success=True)
+    res.status_code = 200
+    return res
 
 
 
@@ -278,31 +326,31 @@ def updateQuest(QID):
     contentDict = contentDict[0]
     #Null checks
     if "Name" in contentDict:
-        sql+= "Name=" + contentDict['Name']
+        sql+= "Name=" + "'"+contentDict['Name']+"'"
         counter+=1
     if "EXP" in contentDict:
         if counter > 0:
-            sql+= ", EXP=" + contentDict['EXP']
+            sql+= ", EXP=" + str(contentDict['EXP'])
         else:
-            sql+= "EXP=" + contentDict['EXP']
+            sql+= "EXP=" + str(contentDict['EXP'])
         counter+=1
     if "Copper" in contentDict:
         if counter > 0:
-            sql+= ", Copper=" + contentDict['Copper']
+            sql+= ", Copper=" + str(contentDict['Copper'])
         else:
-            sql+= "Copper=" + contentDict['Copper']
+            sql+= "Copper=" + str(contentDict['Copper'])
         counter+=1
     if "Silver" in contentDict:
         if counter > 0:
-            sql+= ", Silver=" + contentDict['Silver']
+            sql+= ", Silver=" + str(contentDict['Silver'])
         else:
-            sql+= "Silver=" + contentDict['Silver']
+            sql+= "Silver=" + str(contentDict['Silver'])
         counter+=1
     if "Gold" in contentDict:
         if counter > 0:
-            sql+= ", Gold=" + contentDict['Gold']
+            sql+= ", Gold=" + str(contentDict['Gold'])
         else:
-            sql+= "Gold=" + contentDict['Gold']
+            sql+= "Gold=" + str(contentDict['Gold'])
         counter+=1
     if counter < 1:
         res = jsonify(success=False)
@@ -310,7 +358,7 @@ def updateQuest(QID):
 
         return res
 
-    sql += " WHERE qid=%s"
+    sql += """ WHERE qid=%s"""
 
     
     con  = connection()
@@ -357,11 +405,47 @@ def setNewOrderNumber(con,SID):
 
     return len(results)+1
     
+def setNewSubOrderNumber(con,QID):
+    sql = """SELECT ordernumber FROM SubGoal WHERE QID = %s"""
+    
+    cur = con.cursor()
+    cur.execute(sql,(QID,))
+    results = cur.fetchall()
+
+    cur.close()
+
+    return len(results)+1
 
 
 def setOrderNumber(Arr):
     return sorted(Arr)
 
+
+def rearrangeQuestOrder(con,SID,delOrderNumber):
+
+    cur = con.cursor()
+    #1. SID, 2. delOrderNumber
+    sql = """UPDATE Quest SET ordernumber = (ordernumber - 1) WHERE sid = %s AND ordernumber > %s"""
+    cur.execute(sql,(SID,delOrderNumber))
+    con.commit()
+    cur.close()
+
+    return True
+
+
+
+
+
+def rearrangeSubQuestOrder(con,QID,delOrderNumber):
+
+    cur = con.cursor()
+    #1. SID, 2. delOrderNumber
+    sql = """UPDATE SubGoal SET ordernumber = (ordernumber - 1) WHERE qid = %s AND ordernumber > %s"""
+    cur.execute(sql,(QID,delOrderNumber))
+    con.commit()
+    cur.close()
+
+    return True
 
 
 def fetchSubQuests(con,QID):
@@ -383,3 +467,10 @@ def fetchSubQuests(con,QID):
     return insertObject
 
 
+def get_missing_summatin(a):
+  n = a[-1]
+  total = n*(n+1)//2
+  summation = 0
+  summation = sum(a)
+  result = total-summation
+  print(result)

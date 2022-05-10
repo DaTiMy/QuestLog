@@ -1,4 +1,5 @@
-
+DELETE FROM Quest;
+DELETE FROM SubGoal;
 INSERT INTO User(name,username,password,slots,sessiontoken) VALUES(
 "Tim",
 "daTimy",
@@ -21,9 +22,11 @@ INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (1
 INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (2,"Quest 1: Find Jannes!",130, 20, 5, 3, 0, 1);
 INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (2,"Quest 1: Find Makro!",100, 20, 5, 3, 0, 2);
 
-INSERT INTO SubGoal (qid,name,description,finish) VALUES (1,"SubQuest 1: Buy some Coke!", "Visit REWE!",0);
-INSERT INTO SubGoal (qid,name,description,finish) VALUES (1,"SubQuest 2: Buy some Spezi!", "Visit Kaufland!",0);
 
-INSERT INTO SubGoal (qid,name,description,finish) VALUES (4,"SubQuest 1: Buy some Mako!", "Visit bib!",0);
-INSERT INTO SubGoal (qid,name,description,finish) VALUES (4,"SubQuest 2: Go skate!", "Visit Kaufland!",0);
-INSERT INTO SubGoal (qid,name,description,finish) VALUES (4,"SubQuest 3: Listen to DnB!", "Visit Kany!",0);
+
+INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (1,"SubQuest 1: Buy some Coke!", "Visit REWE!",0,1);
+INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (1,"SubQuest 2: Buy some Spezi!", "Visit Kaufland!",0,2);
+
+INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (4,"SubQuest 1: Buy some Mako!", "Visit bib!",0,1);
+INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (4,"SubQuest 2: Go skate!", "Visit Kaufland!",0,2);
+INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (4,"SubQuest 3: Listen to DnB!", "Visit Kany!",0,3);
