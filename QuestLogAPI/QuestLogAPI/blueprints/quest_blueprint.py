@@ -230,7 +230,7 @@ def select(QID):
 @quest.route('/select/sid/<SID>', methods=['GET'])
 def selectQSID(SID):
     
-    sql = """SELECT qid, name, exp, copper, silver, gold, finish, ordernumber FROM Quest WHERE sid = %s"""
+    sql = """SELECT qid, name, exp, copper, silver, gold, finish, ordernumber FROM Quest WHERE sid = %s ORDER BY ordernumber"""
     con  = connection()
     cur = con.cursor()
     cur.execute(sql,(SID,))
