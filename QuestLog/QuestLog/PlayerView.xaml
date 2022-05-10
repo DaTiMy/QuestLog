@@ -61,6 +61,16 @@
                                         <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0" IsChecked="{Binding Finish}" Click="CheckedSubQuest"/>
                                         <TextBlock Text="{Binding Name}" Foreground="White" Width="275"  Padding="10, 2, 2, 2" FontSize="18"
                                                    ToolTip="{Binding Description}" ToolTipService.ShowDuration="5000">
+                                            <!--Strikethrough bei Checked SubQuest-->
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=CheckSubQuest, Path=IsChecked}" Value="True">
+                                                            <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
                                         </TextBlock>
                                     </StackPanel>
                                 </Border>
@@ -72,6 +82,15 @@
                                       Foreground="White" FontFamily="Rockwell" FontSize="24" 
                                       Width="344" ClipToBounds="True" BorderThickness="1,1,1,1"                                     
                                       IsSelected="False" Focusable="False" Padding="30, 5, 5, 5">
+                                <TreeViewItem.Style>
+                                    <Style TargetType="TreeViewItem">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=CheckQuest, Path=IsChecked}" Value="True">
+                                                <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TreeViewItem.Style>
                             </TreeViewItem>
                             <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest">
                                 <CheckBox.LayoutTransform>

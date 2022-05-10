@@ -60,32 +60,36 @@ namespace QuestLog
             int qid = ((sender as CheckBox).DataContext as Quest).QID;
             object header = (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header;
 
-            if((sender as CheckBox).IsChecked == true)
-            {
-                TextBlock text = new TextBlock();
+            TextBlock text = new TextBlock();
 
+            if ((sender as CheckBox).IsChecked == true)
+            {
                 if(header is TextBlock)
                 {
                     text.Text = (header as TextBlock).Text;
-                    text.TextDecorations = TextDecorations.Strikethrough;
-                    (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
                 }
                 else if(header is string)
                 {
                     string questtext = header.ToString();
                     text.Text = questtext;
-                    text.TextDecorations = TextDecorations.Strikethrough;
-                    (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
                 }
+                text.TextDecorations = TextDecorations.Strikethrough;
             }
             else
             {
-                TextBlock text = new TextBlock();
-                text.Text = (header as TextBlock).Text;
+                if (header is TextBlock)
+                {
+                    text.Text = (header as TextBlock).Text;
+                }
+                else if (header is string)
+                {
+                    string questtext = header.ToString();
+                    text.Text = questtext;
+                }
                 text.TextDecorations = null;
-                (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
             }
 
+            (((sender as CheckBox).Parent as StackPanel).Children[0] as TreeViewItem).Header = text;
 
             Connection.FinishQuest(qid);
         }
@@ -93,6 +97,20 @@ namespace QuestLog
         public void CheckedSubQuest(object sender, RoutedEventArgs e)
         {
             int sqid = ((sender as CheckBox).DataContext as SubQuest).SQID;
+
+            //TextBlock subquest = ((sender as CheckBox).Parent as StackPanel).Children[1] as TextBlock;
+
+            //TextBlock text = new TextBlock();
+
+            //if ((sender as CheckBox).IsChecked == true)
+            //{
+            //    subquest.TextDecorations = TextDecorations.Strikethrough;
+            //}
+            //else
+            //{
+            //    subquest.TextDecorations = null;
+            //}
+
             Connection.FinishSubQuest(sqid);
         }
     }

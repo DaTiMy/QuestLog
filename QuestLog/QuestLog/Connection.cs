@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +27,16 @@ namespace QuestLog
 
         public static void FinishQuest(int QID)
         {
-            //Patch request here
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/finish/quest/" + QID);
+            var request = new RestRequest();
+            client.PatchAsync(request).Wait();  
         }
 
         public static void FinishSubQuest(int SQID)
         {
-            //Patch request here
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/finish/subquest/" + SQID);
+            var request = new RestRequest();
+            client.PatchAsync(request).Wait();
         }
     }
 }
