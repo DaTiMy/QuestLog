@@ -10,35 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuestLog
 {
     /// <summary>
-    /// Interaction logic for Window2.xaml
+    /// Interaction logic for PlayerView.xaml
     /// </summary>
     public partial class DMView : UserControl
     {
+        public List<Quest> Quests { get; set; }
 
-        object Quests = Enumerable.Range(1, 50)
-            .Select(x => new Quest()
-            {
-                Name = "Quest " + x,
-                OrderNumber = x,
-                Subquests = Enumerable.Range(1, 8)
-                            .Select(y => new SubQuest()
-                            {
-                                Name = "SubQuest " + y
-                            }).ToList()
-
-            });
 
         public DMView()
         {
             InitializeComponent();
 
-            object Q = Connection.GetQuestList(2);
-            DataContext = Connection.GetQuestList(2);
+            Quests = Connection.GetQuestList(1);
+
+            DataContext = Quests;
         }
 
         #region Toolbar functionality
@@ -63,5 +54,17 @@ namespace QuestLog
             MainWindow.Instance.DragMove();
         }
         #endregion
+
+        public void CheckedQuest(object sender, RoutedEventArgs e)
+        {
+            int qid = ((sender as CheckBox).DataContext as Quest).QID;
+            Connection.FinishQuest(qid);
+        }
+
+        public void CheckedSubQuest(object sender, RoutedEventArgs e)
+        {
+            int sqid = ((sender as CheckBox).DataContext as SubQuest).SQID;
+            Connection.FinishSubQuest(sqid);
+        }
     }
 }

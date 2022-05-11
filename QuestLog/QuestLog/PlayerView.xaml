@@ -78,7 +78,7 @@
                         </TreeView.Resources>
                         <!--Element for Quests-->
                         <StackPanel Orientation="Horizontal">
-                            <TreeViewItem x:Name="TreeElementQuest" Header="{Binding Name}" ItemsSource="{Binding Subquests}" 
+                            <TreeViewItem x:Name="TreeElementQuest" Header=" " ItemsSource="{Binding Subquests}" 
                                       Foreground="White" FontFamily="Rockwell" FontSize="24" 
                                       Width="344" ClipToBounds="True" BorderThickness="1,1,1,1"                                     
                                       IsSelected="False" Focusable="False" Padding="30, 5, 5, 5">
@@ -92,6 +92,19 @@
                                     </Style>
                                 </TreeViewItem.Style>
                             </TreeViewItem>
+                            <TextBlock Text="{Binding Name}" Margin="-294,6,0,0" Foreground="White" 
+                                       FontFamily="Rockwell" FontSize="24" Panel.ZIndex="-1">
+                                 <!--Strikethrough bei Checked Quest-->
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=CheckQuest, Path=IsChecked}" Value="True">
+                                                <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                             <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest">
                                 <CheckBox.LayoutTransform>
                                     <ScaleTransform ScaleX="2" ScaleY="2" />

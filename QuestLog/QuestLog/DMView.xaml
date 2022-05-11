@@ -26,14 +26,14 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
                        Color="White" />
             </Style.Resources>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Background}"/>
         </Grid.Background>
-        <ListView Width="400" Height="550" ItemsSource="{Binding}" ScrollViewer.CanContentScroll="False" Foreground="{x:Null}">
+        <ListView x:Name="QuestView" Width="400" Height="550" ItemsSource="{Binding}" 
+                  ScrollViewer.CanContentScroll="False" Foreground="{x:Null}">
             <ListView.Background>
                 <SolidColorBrush Color="{DynamicResource GreyE1}"/>
             </ListView.Background>
@@ -49,13 +49,8 @@
                             </Style>
                         </TreeView.ItemContainerStyle>
                         <TreeView.Resources>
-                            <!--Element for Quests-->
-                            <HierarchicalDataTemplate DataType="{x:Type src:Quest}" ItemsSource="{Binding Path=Subquests}">
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox x:Name="CheckQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </HierarchicalDataTemplate>
+                            <!--Basis for TreeView-->
+                            <HierarchicalDataTemplate DataType="{x:Type src:Quest}" ItemsSource="{Binding Path=Subquests}"/>
                             <!--Element for Subquests-->
                             <DataTemplate DataType="{x:Type src:SubQuest}">
                                 <Border BorderThickness="1" Margin="2,2,2,2">
@@ -63,20 +58,54 @@
                                         <SolidColorBrush Color="#FFAAAAAA"/>
                                     </Border.BorderBrush>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
-                                        <TextBlock Text="{Binding Name}" Foreground="White" Width="275"  Padding="50, 2, 2, 2" FontSize="18"/>
+                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0" IsChecked="{Binding Finish}" Click="CheckedSubQuest"/>
+                                        <TextBlock Text="{Binding Name}" Foreground="White" Width="275"  Padding="10, 2, 2, 2" FontSize="18"
+                                                   ToolTip="{Binding Description}" ToolTipService.ShowDuration="5000">
+                                            <!--Strikethrough bei Checked SubQuest-->
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=CheckSubQuest, Path=IsChecked}" Value="True">
+                                                            <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </TreeView.Resources>
-                        <!--Full list element-->
+                        <!--Element for Quests-->
                         <StackPanel Orientation="Horizontal">
-                            <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Subquests}" 
+                            <TreeViewItem x:Name="TreeElementQuest" Header=" " ItemsSource="{Binding Subquests}" 
                                       Foreground="White" FontFamily="Rockwell" FontSize="24" 
                                       Width="344" ClipToBounds="True" BorderThickness="1,1,1,1"                                     
                                       IsSelected="False" Focusable="False" Padding="30, 5, 5, 5">
+                                <TreeViewItem.Style>
+                                    <Style TargetType="TreeViewItem">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=CheckQuest, Path=IsChecked}" Value="True">
+                                                <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TreeViewItem.Style>
                             </TreeViewItem>
-                            <CheckBox Margin="-35, 5, 0, 0">
+                            <TextBlock Text="{Binding Name}" Margin="-294,6,0,0" Foreground="White" 
+                                       FontFamily="Rockwell" FontSize="24" Panel.ZIndex="-1">
+                                 <!--Strikethrough bei Checked Quest-->
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=CheckQuest, Path=IsChecked}" Value="True">
+                                                <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest">
                                 <CheckBox.LayoutTransform>
                                     <ScaleTransform ScaleX="2" ScaleY="2" />
                                 </CheckBox.LayoutTransform>
@@ -100,19 +129,19 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="EXP: " TextAlignment="Left" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="0" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="TextEXP" Text="500" FontFamily="Rockwell"
+                                    <TextBlock x:Name="TextEXP" Text="{Binding EXP}" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="1" HorizontalAlignment="Left" FontStyle="Italic"/>
                                     <TextBlock Text="Gold: " TextAlignment="Left" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="2" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="TextGold" Text="500" FontFamily="Rockwell"
+                                    <TextBlock x:Name="TextGold" Text="{Binding Gold}" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="3" HorizontalAlignment="Left" FontStyle="Italic"/>
                                     <TextBlock Text="Silver: " TextAlignment="Left" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="4" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="TextSilver" Text="500" FontFamily="Rockwell"
+                                    <TextBlock x:Name="TextSilver" Text="{Binding Silver}" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="5" HorizontalAlignment="Left" FontStyle="Italic"/>
                                     <TextBlock Text="Copper: " TextAlignment="Left" FontFamily="Rockwell" FontSize="10"
                                        Foreground="White" Grid.Column="6" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="TextCopper" Text="500" FontFamily="Rockwell"
+                                    <TextBlock x:Name="TextCopper" Text="{Binding Copper}" FontFamily="Rockwell"
                                        Foreground="White" Grid.Column="7" HorizontalAlignment="Center" FontStyle="Italic"/>
                                 </Grid>
                             </Border>
