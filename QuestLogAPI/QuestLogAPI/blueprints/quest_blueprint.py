@@ -47,11 +47,12 @@ def addQuest(SID):
     contentDict = request.json
 
     sql = """INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
-
+    print(contentDict)
+    return contentDict
     con  = connection()
     cur = con.cursor()
 
-    cur.execute(sql,(SID, contentDict[3], contentDict[1], contentDict[0], contentDict[4], contentDict[2], 0, setNewOrderNumber(con,SID)))
+    cur.execute(sql,(SID, contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,SID)))
     con.commit()
     cur.close()
     con.close()
