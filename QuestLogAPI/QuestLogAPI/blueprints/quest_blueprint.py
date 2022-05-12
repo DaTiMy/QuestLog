@@ -11,7 +11,7 @@ quest = Blueprint('quest_blueprint', __name__, url_prefix='/quests')
 questSchema = {
 
     "properties": {
-        "Copper": {"type": "string"},
+        "Copper": {"type": "integer"},
         "EXP": {"type": "integer"},
         "Gold": {"type": "integer"},
         "Name": {"type": "string"},
@@ -48,7 +48,7 @@ def addQuest(SID):
 
     con  = connection()
     cur = con.cursor()
-    contentDict = contentDict[0]
+
     cur.execute(sql,(SID, contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,SID)))
     con.commit()
     cur.close()
@@ -75,7 +75,7 @@ def addSubQuest(QID):
 
     con  = connection()
     cur = con.cursor()
-    contentDict = contentDict[0]
+    
     cur.execute(sql,(QID, contentDict['Name'], contentDict['Description'],0, setNewSubOrderNumber(con,QID)))
     con.commit()
     cur.close()
@@ -322,7 +322,7 @@ def updateQuest(QID):
     counter = 0
     sql = """UPDATE Quest SET """
     contentDict = json.loads(request.data)
-    contentDict = contentDict[0]
+
     #Null checks
     if "Name" in contentDict:
         sql+= "Name=" + "'"+contentDict['Name']+"'"
