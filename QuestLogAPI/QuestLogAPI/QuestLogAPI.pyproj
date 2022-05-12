@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="blueprints\quest_blueprint.py" />
+    <Compile Include="blueprints\session_blueprint.py" />
     <Compile Include="blueprints\test_blueprint.py" />
     <Compile Include="blueprints\user_blueprint.py" />
     <Compile Include="cogs\registration.py" />

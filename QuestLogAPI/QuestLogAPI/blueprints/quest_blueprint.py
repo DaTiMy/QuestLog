@@ -3,7 +3,7 @@ from flask import Blueprint, Response, Request, jsonify, request
 from connect.connect import connection
 import jsonschema
 import json
-from jsonschema import validate
+from jsonschema import validate, FormatChecker
 
 quest = Blueprint('quest_blueprint', __name__, url_prefix='/quests')
 
@@ -15,10 +15,9 @@ questSchema = {
         "EXP": {"type": "integer"},
         "Gold": {"type": "integer"},
         "Name": {"type": "string"},
-        "SID": {"type": "integer"},
         "Silver": {"type": "integer"},
     },
-  "required": ["Copper", "EXP", "Gold", "Name", "SID", "Silver"]
+  "required": ["Copper", "EXP", "Gold", "Name", "Silver"]
 }
 
 subQuestSchema = {
@@ -34,8 +33,8 @@ subQuestSchema = {
 
 #region routes
 
-@quest.route('/add/quest', methods=['POST'])
-def addQuest():
+@quest.route('/add/quest/<SID>', methods=['POST'])
+def addQuest(SID):
     content = request.json
 
     isValidate = validateQuestJson(content)
@@ -50,7 +49,7 @@ def addQuest():
     con  = connection()
     cur = con.cursor()
     contentDict = contentDict[0]
-    cur.execute(sql,(contentDict['SID'], contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,contentDict['SID'])))
+    cur.execute(sql,(SID, contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,SID)))
     con.commit()
     cur.close()
     con.close()
@@ -61,8 +60,8 @@ def addQuest():
 
 
 
-@quest.route('/add/subquest', methods=['POST'])
-def addSubQuest():
+@quest.route('/add/subquest/<QID>', methods=['POST'])
+def addSubQuest(QID):
     content = request.json
 
     isValidate = validateSubQuestJson(content)
@@ -77,7 +76,7 @@ def addSubQuest():
     con  = connection()
     cur = con.cursor()
     contentDict = contentDict[0]
-    cur.execute(sql,(contentDict['QID'], contentDict['Name'], contentDict['Description'],0, setNewSubOrderNumber(con,contentDict['QID'])))
+    cur.execute(sql,(QID, contentDict['Name'], contentDict['Description'],0, setNewSubOrderNumber(con,QID)))
     con.commit()
     cur.close()
     con.close()
@@ -98,7 +97,7 @@ def deleteQuest(QID):
 
     result = result[0]
 
-   
+
 
     sql = """DELETE FROM Quest WHERE qid = %s"""
 
@@ -474,3 +473,7 @@ def get_missing_summatin(a):
   summation = sum(a)
   result = total-summation
   print(result)
+
+
+
+

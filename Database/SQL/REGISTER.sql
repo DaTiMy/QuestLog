@@ -20,7 +20,7 @@ INSERT INTO Session(name,password) VALUES("testo","1312341");
 INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (1,"Quest 1: Find Ledro!",100, 20, 5, 3, 0, 1);
 INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (1,"Quest 2: Find Tim!",100, 20, 5, 3, 0, 2);
 INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (2,"Quest 1: Find Jannes!",130, 20, 5, 3, 0, 1);
-INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (2,"Quest 2: Find Makro!",100, 20, 5, 3, 0, 2);
+INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (3,"Quest 2: Find Makro!",100, 20, 5, 3, 0, 2);
 
 
 
