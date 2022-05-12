@@ -40,7 +40,9 @@ def addQuest(SID):
     isValidate = validateQuestJson(content)
 
     if not isValidate:
-        return quest.register_error_handler(400, handle_bad_request)
+        res = jsonify(success=False)
+        res.status_code = 400
+        return res
    
     contentDict = json.loads(request.data)
 
@@ -67,7 +69,9 @@ def addSubQuest(QID):
     isValidate = validateSubQuestJson(content)
 
     if not isValidate:
-        return quest.register_error_handler(400, handle_bad_request)
+        res = jsonify(success=False)
+        res.status_code = 400
+        return res
    
     contentDict = json.loads(request.data)
 
