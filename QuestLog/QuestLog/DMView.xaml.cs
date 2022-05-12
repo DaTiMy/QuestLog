@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,20 @@ namespace QuestLog
         {
             int sqid = ((sender as CheckBox).DataContext as SubQuest).SQID;
             Connection.FinishSubQuest(sqid);
+        }
+
+        public void AddQuest(object sender, RoutedEventArgs e)
+        {
+            Quest q = new Quest(0, 0, false, 0, "newQuest", -1, -1, 0, new List<SubQuest>());
+            Quests.Add(q);
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            DataContext = Quests;
+            ICollectionView view = CollectionViewSource.GetDefaultView(Quests);
+            view.Refresh();
         }
     }
 }

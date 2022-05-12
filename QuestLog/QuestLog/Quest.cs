@@ -38,5 +38,18 @@ namespace QuestLog
         [JsonProperty("subquests")]
         public List<SubQuest> Subquests { get; set; }
 
+        public Quest(int copper, int exp, bool finish, int gold, string name, int orderNumber, int qid, int silver, List<SubQuest> subquests)
+        {
+            Copper = copper;
+            EXP = exp;
+            Finish = finish;
+            Gold = gold;
+            Name = name;
+            OrderNumber = orderNumber;
+            QID = qid;
+            Silver = silver;
+            Subquests = subquests;
+        }
+
     }
 }
