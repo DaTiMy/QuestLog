@@ -58,7 +58,7 @@
                                         <SolidColorBrush Color="#FFAAAAAA"/>
                                     </Border.BorderBrush>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0" IsChecked="{Binding Finish}" Click="CheckedSubQuest"/>
+                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0" IsChecked="{Binding Finish}" Click="CheckedSubQuest" IsEnabled="False"/>
                                         <TextBlock Text="{Binding Name}" Foreground="White" Width="275"  Padding="10, 2, 2, 2" FontSize="18"
                                                    ToolTip="{Binding Description}" ToolTipService.ShowDuration="5000">
                                             <!--Strikethrough bei Checked SubQuest-->
@@ -105,7 +105,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest">
+                            <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest" IsEnabled="False">
                                 <CheckBox.LayoutTransform>
                                     <ScaleTransform ScaleX="2" ScaleY="2" />
                                 </CheckBox.LayoutTransform>
