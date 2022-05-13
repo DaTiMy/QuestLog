@@ -51,7 +51,7 @@ def addQuest(SID):
     con  = connection()
     cur = con.cursor()
 
-    cur.execute(sql,(SID, contentDict['Name'], contentDict['EXP'], contentDict['Copper'], contentDict['Silver'], contentDict['Gold'], 0, setNewOrderNumber(con,SID)))
+    cur.execute(sql,(SID, contentDict["Name"], contentDict["EXP"], contentDict["Copper"], contentDict["Silver"], contentDict["Gold"], 0, setNewOrderNumber(con,SID)))
     con.commit()
     cur.close()
     con.close()
@@ -80,7 +80,7 @@ def addSubQuest(QID):
     con  = connection()
     cur = con.cursor()
     
-    cur.execute(sql,(QID, contentDict['Name'], contentDict['Description'],0, setNewSubOrderNumber(con,QID)))
+    cur.execute(sql,(QID, contentDict["Name"], contentDict["Description"],0, setNewSubOrderNumber(con,QID)))
     con.commit()
     cur.close()
     con.close()
