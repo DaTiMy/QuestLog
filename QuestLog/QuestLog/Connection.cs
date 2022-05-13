@@ -44,26 +44,14 @@ namespace QuestLog
         {
             var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/add/quest/" + SID);
             var request = new RestRequest();
+
             DBQuest dbQuest = new DBQuest(q.Copper, q.EXP, q.Gold, q.Name, q.Silver);
+
             string json = JsonConvert.SerializeObject(dbQuest);
 
-            StringBuilder sb = new StringBuilder();
-            using (StringWriter sw = new StringWriter(sb))
-            using (JsonTextWriter writer = new JsonTextWriter(sw))
-            {
-                writer.QuoteChar = '\'';
+            request.AddJsonBody(json);
 
-                JsonSerializer ser = new JsonSerializer();
-                ser.Serialize(writer, json);
-            }
-
-            string j = @"{'Copper':2,'EXP':5,'Gold':15,'Name':'newQuestchen','Silver':59}";
-
-            request.AddJsonBody(j);
-
-            Task<RestResponse> r = client.PostAsync(request);
-            Console.WriteLine(r.Result.Content.ToString());
-            
+            client.PostAsync(request).Wait();           
         }
     }
 }
