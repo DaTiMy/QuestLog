@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Connection.cs" />
+    <Compile Include="DBQuest.cs" />
     <Compile Include="DMView.xaml.cs">
       <DependentUpon>DMView.xaml</DependentUpon>
     </Compile>

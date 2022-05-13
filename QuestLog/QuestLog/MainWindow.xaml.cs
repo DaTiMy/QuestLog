@@ -65,6 +65,7 @@ namespace QuestLog
         {
             InitializeComponent();
             CurrWindow = ActWindow.Login;
+            SID = 1;
         }
 
         #region Enum ActWindow

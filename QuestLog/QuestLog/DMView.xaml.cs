@@ -70,11 +70,14 @@ namespace QuestLog
 
         public void AddQuest(object sender, RoutedEventArgs e)
         {
-            Quest q = new Quest(0, 0, false, 0, "newQuest", -1, -1, 0, new List<SubQuest>());
+            Quest q = new Quest(2, 5, false, 15, "newQuestchen", -1, -1, 59, new List<SubQuest>());
             Quests.Add(q);
+            //Datenbankanbindung
+            Connection.AddQuest(MainWindow.Instance.SID, q);
             Refresh();
         }
 
+        //Refresh for ListView after adding or removing items
         public void Refresh()
         {
             DataContext = Quests;

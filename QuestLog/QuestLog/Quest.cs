@@ -51,5 +51,12 @@ namespace QuestLog
             Subquests = subquests;
         }
 
+        public string Serialize()
+        {
+            
+
+            return "";
+        }
+
     }
 }
