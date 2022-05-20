@@ -53,5 +53,13 @@ namespace QuestLog
 
             client.PostAsync(request).Wait();           
         }
+
+        public static void RemoveQuest(int QID)
+        {
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/delete/quest/" + QID);
+            var request = new RestRequest();
+
+            client.DeleteAsync(request).Wait();
+        }
     }
 }

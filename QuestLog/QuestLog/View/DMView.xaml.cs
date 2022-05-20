@@ -23,7 +23,6 @@ namespace QuestLog
     {
         public List<Quest> Quests { get; set; }
 
-
         public DMView()
         {
             InitializeComponent();
@@ -74,6 +73,29 @@ namespace QuestLog
             Quests.Add(q);
             //Datenbankanbindung
             Connection.AddQuest(MainWindow.Instance.SID, q);
+            Refresh();
+        }
+
+        public void EditQuest(object sender, RoutedEventArgs e)
+        {
+            int index = QuestView.SelectedIndex;
+
+            if (index == -1)
+                return;
+
+            var editaddWindow = new EditAddQuest();
+            editaddWindow.ShowDialog();
+        }
+
+        public void RemoveQuest(object sender, RoutedEventArgs e)
+        {
+            int index = QuestView.SelectedIndex;
+
+            if (index == -1)
+                return;
+
+            Connection.RemoveQuest(Quests[index].QID);
+            Quests.RemoveAt(index);
             Refresh();
         }
 

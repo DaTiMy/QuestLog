@@ -9,12 +9,12 @@ QuestLog
 none
 false
 DEBUG;TRACE
-C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\App.xaml
-3-1649537989
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\View\App.xaml
+4-1464398542
 
-12-410638562
+13-1014477250
 272003503653
-MainWindow.xaml;DMView.xaml;PlayerView.xaml;
+View\EditAddQuest.xaml;View\MainWindow.xaml;View\DMView.xaml;View\PlayerView.xaml;
 
-True
+False
 

@@ -86,37 +86,44 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connection.cs" />
-    <Compile Include="DBQuest.cs" />
-    <Compile Include="DMView.xaml.cs">
+    <Compile Include="View\EditAddQuest.xaml.cs">
+      <DependentUpon>EditAddQuest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Connection.cs" />
+    <Compile Include="Model\DBQuest.cs" />
+    <Compile Include="View\DMView.xaml.cs">
       <DependentUpon>DMView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlayerView.xaml.cs">
+    <Compile Include="View\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Quest.cs" />
-    <Compile Include="SubQuest.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Model\Quest.cs" />
+    <Compile Include="Model\SubQuest.cs" />
+    <Page Include="View\EditAddQuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DMView.xaml">
+    <Page Include="View\DMView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PlayerView.xaml">
+    <Page Include="View\PlayerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
