@@ -50,13 +50,5 @@ namespace QuestLog
             Silver = silver;
             Subquests = subquests;
         }
-
-        public string Serialize()
-        {
-            
-
-            return "";
-        }
-
     }
 }

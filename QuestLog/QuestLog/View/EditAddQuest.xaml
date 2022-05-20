@@ -41,11 +41,47 @@
             <Button Width="20" Background="Transparent" Content="🗖" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MaximizeApplication"/>
             <Button Width="20" Background="DarkRed" Content="✖" Foreground="#181818" BorderThickness="0" Click="ExitApplication" />
         </StackPanel>
+        
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="105">
             <TextBlock Text="Questname:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
             <TextBox Text="" FontSize="16" Foreground="Black" Width="200"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="105">
+            <TextBlock Text="Copper:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+            <TextBox Text="" FontSize="16" Foreground="Black" Width="200"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="105">
+            <TextBlock Text="Experience:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+            <TextBox Text="" FontSize="16" Foreground="Black" Width="200"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="105">
+            <TextBlock Text="Gold:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+            <TextBox Text="" FontSize="16" Foreground="Black" Width="200"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="105">
+            <TextBlock Text="Silver:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+            <TextBox Text="" FontSize="16" Foreground="Black" Width="200"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="105">
+            <TextBlock Text="Subquest(s):" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.Column="1" Grid.RowSpan="3" Orientation="Horizontal" Margin="17">
+            <ListView FontSize="16" Foreground="Black" Width="200" />
         </StackPanel>
     </Grid>
 </Window>

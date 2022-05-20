@@ -51,7 +51,8 @@ namespace QuestLog
 
             request.AddJsonBody(json);
 
-            client.PostAsync(request).Wait();           
+            client.PostAsync(request).Wait();
+            //TODO get request response to get new QID
         }
 
         public static void RemoveQuest(int QID)
