@@ -25,9 +25,9 @@ subQuestSchema = {
     "properties": {
         "Description": {"type": "string"},
         "Name": {"type": "string"},
-        "QID": {"type": "integer"},
+   
     },
-  "required": ["Description", "Name", "QID"]
+  "required": ["Description", "Name"]
 }
 
 
@@ -44,22 +44,33 @@ def addQuest(SID):
         res.status_code = 400
         return res
    
-    contentDict = json.loads(request.json)
+    contentDict = json.loads(request.data)
 
 
     sql = """INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
 
     con  = connection()
     cur = con.cursor()
+    orderNumber = setNewOrderNumber(con,SID)
 
-    cur.execute(sql,(SID, contentDict["Name"], contentDict["EXP"], contentDict["Copper"], contentDict["Silver"], contentDict["Gold"], 0, setNewOrderNumber(con,SID)))
+    cur.execute(sql,(SID, contentDict["Name"], contentDict["EXP"], contentDict["Copper"], contentDict["Silver"], contentDict["Gold"], 0, orderNumber))
     con.commit()
+
+    sql = """SELECT QID FROM Quest WHERE sid = %s AND ordernumber = %s"""
+    cur.execute(sql, (SID, orderNumber))
+
+    result = cur.fetchall()
+    result = result[0]
+
     cur.close()
     con.close()
 
-        
+    newDict = {"QID" : result[0], "odernumber" : orderNumber}
+
     res = jsonify(success=True)
-    return res
+    res.payload = jsonify(newDict)   
+   
+    return res.payload
 
 
 
@@ -74,21 +85,33 @@ def addSubQuest(QID):
         res.status_code = 400
         return res
    
-    contentDict = json.loads(request.json)
+    contentDict = json.loads(request.data)
 
     sql = """INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (%s, %s, %s, %s, %s)"""
 
     con  = connection()
     cur = con.cursor()
-    
-    cur.execute(sql,(QID, contentDict["Name"], contentDict["Description"],0, setNewSubOrderNumber(con,QID)))
+    orderNumber = setNewSubOrderNumber(con,QID)
+    cur.execute(sql,(QID, contentDict["Name"], contentDict["Description"],0, orderNumber))
     con.commit()
+
+    sql = """SELECT sgid FROM SubGoal WHERE qid = %s AND ordernumber = %s"""
+
+    cur.execute(sql,(QID,orderNumber))
+    result = cur.fetchall()
+
+    result = result[0]
+
+
+
     cur.close()
     con.close()
 
+    newDict = {"sgid": result[0], "ordernumber" : orderNumber}
         
     res = jsonify(success=True)
-    return res
+    res.payload = jsonify(newDict)
+    return res.payload
 
 
 @quest.route('/delete/quest/<QID>', methods=['DELETE'])

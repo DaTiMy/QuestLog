@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.register_blueprint(user)
 app.register_blueprint(quest)
-
+app.register_blueprint(test_blueprint_1)
 
 
 
