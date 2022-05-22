@@ -44,7 +44,7 @@ def addQuest(SID):
         res.status_code = 400
         return res
    
-    contentDict = json.loads(request.data)
+    contentDict = json.loads(request.json)
 
 
     sql = """INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
@@ -85,7 +85,7 @@ def addSubQuest(QID):
         res.status_code = 400
         return res
    
-    contentDict = json.loads(request.data)
+    contentDict = json.loads(request.json)
 
     sql = """INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (%s, %s, %s, %s, %s)"""
 
