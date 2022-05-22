@@ -45,7 +45,7 @@ def addQuest(SID):
         return res
 
 
-    contentDict = json.loads(json.dumps(request.json))
+    contentDict = json.loads(request.json)
 
 
     sql = """INSERT INTO Quest (sid,name,exp,copper,silver,gold,finish,ordernumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
@@ -86,7 +86,7 @@ def addSubQuest(QID):
         res.status_code = 400
         return res
    
-    contentDict = json.loads(json.dumps(request.json))
+    contentDict = json.loads(request.json)
 
     sql = """INSERT INTO SubGoal (qid,name,description,finish,ordernumber) VALUES (%s, %s, %s, %s, %s)"""
 
@@ -350,7 +350,7 @@ def updateQuest(QID):
 
     counter = 0
     sql = """UPDATE Quest SET """
-    contentDict = json.loads(json.dumps(request.json))
+    contentDict = json.loads(request.json)
 
     #Null checks
     if "Name" in contentDict:
