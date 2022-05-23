@@ -40,7 +40,7 @@ namespace QuestLog
             client.PatchAsync(request).Wait();
         }
 
-        public static void AddQuest(int SID, Quest q)
+        public static Quest AddQuest(int SID, Quest q)
         {
             var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/add/quest/" + SID);
             var request = new RestRequest();
@@ -48,16 +48,49 @@ namespace QuestLog
             DBQuest dbQuest = new DBQuest(q.Copper, q.EXP, q.Gold, q.Name, q.Silver);
 
             string json = JsonConvert.SerializeObject(dbQuest);
-
             request.AddJsonBody(json);
 
-            client.PostAsync(request).Wait();
-            //TODO get request response to get new QID
+            Task<RestResponse> res = client.PostAsync(request);
+            res.Wait();
+            string payload = res.Result.Content;
+            Dictionary<string, int> data = JsonConvert.DeserializeObject<Dictionary<string, int>>(payload);
+            q.QID = data["QID"];
+            q.OrderNumber = data["ordernumber"];
+
+            return q;     
+        }
+
+        public static SubQuest AddSubQuest(int QID, SubQuest sq)
+        {
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/add/subquest/" + QID);
+            var request = new RestRequest();
+
+            DBSubQuest dbSubQuest = new DBSubQuest(sq.Description, sq.Name);
+
+            string json = JsonConvert.SerializeObject(dbSubQuest);
+            request.AddJsonBody(json);
+            Task<RestResponse> res = client.PostAsync(request);
+            res.Wait();
+            string payload = res.Result.Content;
+            Dictionary<string, int> data = JsonConvert.DeserializeObject<Dictionary<string, int>>(payload);
+
+            sq.SQID = data["sgid"];
+            sq.OrderNumber = data["ordernumber"];
+
+            return sq;
         }
 
         public static void RemoveQuest(int QID)
         {
             var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/delete/quest/" + QID);
+            var request = new RestRequest();
+
+            client.DeleteAsync(request).Wait();
+        }
+
+        public static void RemoveSubQuest(int SQID)
+        {
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/delete/subquest/" + SQID);
             var request = new RestRequest();
 
             client.DeleteAsync(request).Wait();
