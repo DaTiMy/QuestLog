@@ -402,6 +402,46 @@ def updateQuest(QID):
     return res
 
 
+@quest.route('/update/subquest/<SGID>', methods=['PATCH'])
+def updateSubQuest(SGID):
+
+    counter = 0
+    sql = """UPDATE SubGoal SET """
+    contentDict = json.loads(request.json)
+
+    #Null checks
+    if "Name" in contentDict:
+        sql+= "Name=" + "'"+contentDict['Name']+"'"
+        counter+=1
+    if "Description" in contentDict:
+        if counter > 0:
+            sql+= ", Description=" + "'"+contentDict['Description']+"'"
+        else:
+            sql+= "Description=" + "'"+contentDict['Description']+"'"
+        counter+=1
+
+    if counter < 1:
+        res = jsonify(success=False)
+        res.status_code = 400
+
+        return res
+
+    sql += """ WHERE sgid=%s"""
+
+    
+    con  = connection()
+    cur = con.cursor()
+    cur.execute(sql,(SGID,))
+    con.commit()
+    cur.close()
+    con.close()
+
+    res = jsonify(success=True)
+    res.status_code = 200
+
+    return res
+
+
 #endregion
 
 
