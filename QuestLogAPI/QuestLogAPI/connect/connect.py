@@ -3,8 +3,8 @@ from mysql.connector import errorcode
 
 def connection():
     try:
-      cnx = mysql.connector.connect(user='db_quser', 
-                                    password='d8BYAntt',
+      cnx = mysql.connector.connect(user='ql.user', 
+                                    password='rAmMRS4U',
                                     host='dbquestlog.ccow0wltnjlo.eu-central-1.rds.amazonaws.com',
                                     database='db_questlog')
     except mysql.connector.Error as err:

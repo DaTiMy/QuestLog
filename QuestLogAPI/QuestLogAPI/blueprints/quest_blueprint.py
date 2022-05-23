@@ -43,7 +43,8 @@ def addQuest(SID):
         res = jsonify(success=False)
         res.status_code = 400
         return res
-   
+
+
     contentDict = json.loads(request.json)
 
 
@@ -65,7 +66,7 @@ def addQuest(SID):
     cur.close()
     con.close()
 
-    newDict = {"QID" : result[0], "odernumber" : orderNumber}
+    newDict = {"QID" : result[0], "ordernumber" : orderNumber}
 
     res = jsonify(success=True)
     res.payload = jsonify(newDict)   
@@ -349,7 +350,7 @@ def updateQuest(QID):
 
     counter = 0
     sql = """UPDATE Quest SET """
-    contentDict = json.loads(request.data)
+    contentDict = json.loads(request.json)
 
     #Null checks
     if "Name" in contentDict:
