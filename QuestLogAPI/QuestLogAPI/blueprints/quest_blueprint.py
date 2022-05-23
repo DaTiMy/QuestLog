@@ -149,7 +149,7 @@ def deleteQuest(QID):
 def deleteSubQuest(SGID):
     con  = connection()
     cur = con.cursor()
-    sql = """SELECT qid,ordernumber FROM SubGoal WHERE sqid = %s"""
+    sql = """SELECT qid,ordernumber FROM SubGoal WHERE sgid = %s"""
 
     cur.execute(sql,(SGID,))
     result = cur.fetchall()
