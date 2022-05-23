@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace QuestLog
 {
+    [Serializable]
+
     public class SubQuest
     {
         [JsonProperty("description")]
@@ -18,7 +20,18 @@ namespace QuestLog
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("ordernumber")]
+        public int OrderNumber { get; set; }
+
         [JsonProperty("sgid")]
         public int SQID { get; set; }
+
+        public SubQuest(string description, bool finish, string name, int sqid)
+        {
+            Description = description;
+            Finish = finish;
+            Name = name;
+            SQID = sqid;
+        }
     }
 }

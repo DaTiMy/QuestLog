@@ -90,8 +90,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\EditAddQuest.xaml.cs">
-      <DependentUpon>EditAddQuest.xaml</DependentUpon>
+    <Compile Include="Model\DBSubQuest.cs" />
+    <Compile Include="View\EditQuest.xaml.cs">
+      <DependentUpon>EditQuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Connection.cs" />
     <Compile Include="Model\DBQuest.cs" />
@@ -103,7 +104,7 @@
     </Compile>
     <Compile Include="Model\Quest.cs" />
     <Compile Include="Model\SubQuest.cs" />
-    <Page Include="View\EditAddQuest.xaml">
+    <Page Include="View\EditQuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\removeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\okayIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

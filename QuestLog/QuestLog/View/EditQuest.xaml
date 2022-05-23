@@ -1,0 +1,114 @@
+﻿<Window x:Class="QuestLog.EditQuest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuestLog"
+        mc:Ignorable="d"
+        Title="EditAddQuest"
+        Height="500"
+        Width="360"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="Transparent">
+    <Border BorderThickness="1" BorderBrush="#656565">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="13*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <SolidColorBrush Color="#161616"/>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Tool Bar -->
+            <Border Background="#181818" Grid.ColumnSpan="2"/>
+            <TextBlock Text="Edit/Add Quest" Foreground="DarkGray" VerticalAlignment="Center" Margin="15,0,0,0" Height="16" Grid.ColumnSpan="2"/>
+            <Border Background="Transparent" MouseDown="Drag" Grid.ColumnSpan="2"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="174,0,0,0" Width="60" Grid.Column="1">
+                <Button Width="20" Background="Transparent" Content="🗕" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MinimizeApplication"/>
+                <Button Width="20" Background="Transparent" Content="🗖" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MaximizeApplication"/>
+                <Button Width="20" Background="DarkRed" Content="✖" Foreground="#181818" BorderThickness="0" Click="ExitApplication" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
+                <TextBlock Text="Questname:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+                <TextBox x:Name="txtName" Text="" FontSize="16" Foreground="Black" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
+                <TextBlock Text="Copper:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+                <TextBox x:Name="txtCopper" Text="" FontSize="16" Foreground="Black" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
+                <TextBlock Text="Experience:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+                <TextBox x:Name="txtExp" Text="" FontSize="16" Foreground="Black" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
+                <TextBlock Text="Gold:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+                <TextBox x:Name="txtGold" Text="" FontSize="16" Foreground="Black" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
+                <TextBlock Text="Silver:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
+                <TextBox x:Name="txtSilver" Text="" FontSize="16" Foreground="Black" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
+                <TextBlock Text="Subquest(s):" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="6" Grid.Column="1" Grid.RowSpan="3" Orientation="Horizontal" Margin="17,17,17,17">
+                <ListView x:Name="listSubquests" FontSize="16" Foreground="Black" Width="200" DataContext="{Binding}" ItemsSource="{Binding}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Margin="2" Click="AddSubQuest">
+                    <Image Source="../Resources/addIcon.png" Stretch="Fill"/>
+                </Button>
+                <Button Margin="2">
+                    <Image Source="../Resources/editIcon.png" Stretch="Fill"/>
+                </Button>
+                <Button Margin="2" Click="RemoveSubQuest">
+                    <Image Source="../Resources/removeIcon.png" Stretch="Fill"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Row="9" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <Button Margin="2" Click="VerifyChanges">
+                    <Image Source="../Resources/okayIcon.png" Stretch="Fill"/>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>
