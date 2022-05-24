@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,15 @@ namespace QuestLog
             sq.OrderNumber = data["ordernumber"];
 
             return sq;
+        }
+
+        public static void EditQuest(int QID, string update)
+        {
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/update/quest/" + QID);
+            var request = new RestRequest();
+            request.AddJsonBody(update);
+
+            client.PatchAsync(request).Wait();
         }
 
         public static void RemoveQuest(int QID)

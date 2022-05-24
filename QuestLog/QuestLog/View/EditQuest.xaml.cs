@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace QuestLog
         public EditQuest(Quest q)
         {
             LoadedQuest = q;
+
+            if (LoadedQuest.Subquests == null)
+                LoadedQuest.Subquests = new List<SubQuest>();
             
             InitializeComponent();
 
@@ -63,6 +67,17 @@ namespace QuestLog
 
         private void VerifyChanges(object sender, RoutedEventArgs e)
         {
+            JObject update =
+                new JObject(
+                    new JProperty("Copper", int.Parse(txtCopper.Text)),
+                    new JProperty("EXP", int.Parse(txtExp.Text)),
+                    new JProperty("Gold", int.Parse(txtGold.Text)),
+                    new JProperty("Name", txtName.Text.ToString()),
+                    new JProperty("Silver", int.Parse(txtSilver.Text))
+                    );
+
+            var json = update.ToString();
+            Connection.EditQuest(LoadedQuest.QID, json);
             Close();
         }
 
@@ -84,16 +99,17 @@ namespace QuestLog
 
             Connection.RemoveSubQuest(LoadedQuest.Subquests[index].SQID);
             LoadedQuest.Subquests.RemoveAt(index);
+
+            if (LoadedQuest.Subquests.Count == 0)
+                LoadedQuest.Subquests = new List<SubQuest>();
             Refresh();
         }
 
         public void Refresh()
         {
             DataContext = LoadedQuest.Subquests;
-            ICollectionView view = CollectionViewSource.GetDefaultView(LoadedQuest.Subquests);
+            ICollectionView view = CollectionViewSource.GetDefaultView(listSubquests.Items);
             view.Refresh();
         }
-
-
     }
 }

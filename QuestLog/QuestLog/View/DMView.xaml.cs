@@ -85,6 +85,7 @@ namespace QuestLog
 
             EditQuest editaddWindow = new EditQuest(Quests[index]);
             editaddWindow.ShowDialog();
+            QuestRefresh();
         }
 
         public void RemoveQuest(object sender, RoutedEventArgs e)
@@ -105,6 +106,12 @@ namespace QuestLog
             DataContext = Quests;
             ICollectionView view = CollectionViewSource.GetDefaultView(Quests);
             view.Refresh();
+        }
+
+        public void QuestRefresh()
+        {
+            Quests = Connection.GetQuestList(MainWindow.Instance.SID);
+            Refresh();
         }
     }
 }
