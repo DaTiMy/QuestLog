@@ -95,7 +95,7 @@
                 <Button Margin="2" Click="AddSubQuest">
                     <Image Source="../Resources/addIcon.png" Stretch="Fill"/>
                 </Button>
-                <Button Margin="2">
+                <Button Margin="2" Click="EditSubQuest">
                     <Image Source="../Resources/editIcon.png" Stretch="Fill"/>
                 </Button>
                 <Button Margin="2" Click="RemoveSubQuest">

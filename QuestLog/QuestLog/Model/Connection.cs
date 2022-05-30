@@ -90,6 +90,15 @@ namespace QuestLog
             client.PatchAsync(request).Wait();
         }
 
+        public static void EditSubQuest(int SQID, string update)
+        {
+            var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/update/subquest/" + SQID);
+            var request = new RestRequest();
+            request.AddJsonBody(update);
+
+            client.PatchAsync(request).Wait();
+        }
+
         public static void RemoveQuest(int QID)
         {
             var client = new RestClient("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/delete/quest/" + QID);

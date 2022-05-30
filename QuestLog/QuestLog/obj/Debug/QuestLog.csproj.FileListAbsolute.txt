@@ -92,3 +92,5 @@ C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\DMView.
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\PlayerView.baml
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\EditQuest.g.cs
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\EditQuest.baml
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\EditSubQuest.g.cs
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\EditSubQuest.baml

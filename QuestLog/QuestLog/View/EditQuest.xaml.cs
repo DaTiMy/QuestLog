@@ -47,6 +47,7 @@ namespace QuestLog
         {
             VerifyChanges(sender, e);
         }
+
         public void MaximizeApplication(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow.WindowState == WindowState.Normal)
@@ -54,6 +55,7 @@ namespace QuestLog
             else
                 Application.Current.MainWindow.WindowState = WindowState.Normal;
         }
+
         public void MinimizeApplication(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
@@ -87,6 +89,18 @@ namespace QuestLog
 
             sq = Connection.AddSubQuest(LoadedQuest.QID, sq);
             LoadedQuest.Subquests.Add(sq);
+            Refresh();
+        }
+
+        private void EditSubQuest(object sender, RoutedEventArgs e)
+        {
+            int index = listSubquests.SelectedIndex;
+
+            if (index == -1)
+                return;
+
+            EditSubQuest editsqwindow = new EditSubQuest(LoadedQuest.Subquests[index]);
+            editsqwindow.ShowDialog();
             Refresh();
         }
 

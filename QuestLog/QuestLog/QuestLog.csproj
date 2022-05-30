@@ -99,12 +99,19 @@
     <Compile Include="View\DMView.xaml.cs">
       <DependentUpon>DMView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditSubQuest.xaml.cs">
+      <DependentUpon>EditSubQuest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Quest.cs" />
     <Compile Include="Model\SubQuest.cs" />
     <Page Include="View\EditQuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditSubQuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
