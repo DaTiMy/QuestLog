@@ -9,7 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestLog
+namespace QuestLog.Model
 {
     internal static class Connection
     {

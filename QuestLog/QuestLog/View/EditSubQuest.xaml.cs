@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using QuestLog.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace QuestLog
         #region Toolbar functionality
         public void ExitApplication(object sender, RoutedEventArgs e)
         {
-            Close();
+            VerifyChanges(sender, e);
         }
         public void MaximizeApplication(object sender, RoutedEventArgs e)
         {

@@ -11,6 +11,9 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         Background="Transparent">
+    <!--<Window.DataContext>
+        <local:
+    </Window.DataContext>-->
     <Border BorderThickness="1" BorderBrush="#656565">
         <Grid>
             <Grid.ColumnDefinitions>
