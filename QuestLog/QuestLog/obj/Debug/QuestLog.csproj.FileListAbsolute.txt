@@ -75,8 +75,6 @@ C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\bin\Debug\System.Valu
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\MainWindow.g.cs
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\DMView.g.cs
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\PlayerView.g.cs
-C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\App.g.cs
-C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\App.baml
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\MainWindow.baml
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\DMView.baml
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\PlayerView.baml
@@ -96,3 +94,5 @@ C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\EditQue
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\EditSubQuest.baml
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.baml
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.g.cs
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.baml
+C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.g.cs

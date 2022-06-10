@@ -5,26 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QuestLog
 {
-    public partial class EditSubQuest : Window
+    public class EditSubQuestVM
     {
         private SubQuest LoadedSubQuest { get; set; }
 
-        public EditSubQuest(SubQuest sq)
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public EditSubQuestVM(SubQuest sq)
         {
             LoadedSubQuest = sq;
 
-            InitializeComponent();
-            
             FillDataInitial();
         }
 

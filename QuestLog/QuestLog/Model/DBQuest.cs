@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestLog.Model
+namespace QuestLog
 {
     internal class DBQuest
     {

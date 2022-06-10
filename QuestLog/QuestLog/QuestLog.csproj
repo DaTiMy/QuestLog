@@ -91,7 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\DBSubQuest.cs" />
-    <Compile Include="ViewModel\EditSubQuestViewModel.cs" />
+    <Compile Include="ViewModel\EditSubQuestVM.cs" />
     <Compile Include="View\EditQuest.xaml.cs">
       <DependentUpon>EditQuest.xaml</DependentUpon>
     </Compile>
