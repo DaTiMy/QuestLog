@@ -20,6 +20,16 @@ namespace QuestLog
     {
         private Quest LoadedQuest { get; set; }
 
+        public int SubQuestSelectedIndex
+        {
+            get { return Data.SubQuestSelectedIndex; }
+            set 
+            {
+                Data.SubQuestSelectedIndex = value;
+                //OnPropertyChanged("SubQuestSelectedIndex");
+            }
+        }
+
         public EditQuest(Quest q)
         {
             LoadedQuest = q;
@@ -99,8 +109,8 @@ namespace QuestLog
             if (index == -1)
                 return;
 
-            EditSubQuest editsqwindow = new EditSubQuest(LoadedQuest.Subquests[index]);
-            editsqwindow.ShowDialog();
+            EditSubQuest editSqWindow = new EditSubQuest();
+            editSqWindow.ShowDialog();
             Refresh();
         }
 
@@ -125,5 +135,14 @@ namespace QuestLog
             ICollectionView view = CollectionViewSource.GetDefaultView(listSubquests.Items);
             view.Refresh();
         }
+
+        //private void OnPropertyChanged(string s)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        var e = new PropertyChangedEventArgs(s);
+        //        PropertyChanged(this, e);
+        //    }
+        //}
     }
 }

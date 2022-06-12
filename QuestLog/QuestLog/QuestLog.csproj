@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Data.cs" />
     <Compile Include="Model\DBSubQuest.cs" />
     <Compile Include="ViewModel\EditSubQuestVM.cs" />
     <Compile Include="View\EditQuest.xaml.cs">

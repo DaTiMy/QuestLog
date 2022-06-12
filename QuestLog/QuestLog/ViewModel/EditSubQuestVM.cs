@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,60 +10,86 @@ using System.Windows.Input;
 
 namespace QuestLog
 {
-    public class EditSubQuestVM
+    public class EditSubQuestVM : INotifyPropertyChanged
     {
-        private SubQuest LoadedSubQuest { get; set; }
+        private SubQuest subQuest;
 
-        public string Name { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Description { get; set; }
-
-        public EditSubQuestVM(SubQuest sq)
+        public string Description
         {
-            LoadedSubQuest = sq;
-
-            FillDataInitial();
+            get { return subQuest.Description; }
+            set
+            {
+                subQuest.Description = value;
+                OnPropertyChanged("Description");
+            }
         }
 
-        private void FillDataInitial()
+        public bool Finish
         {
-            txtName.Text = LoadedSubQuest.Name.ToString();
-            txtDesc.Text = LoadedSubQuest.Description.ToString();
+            get { return subQuest.Finish; }
+            set
+            {
+                subQuest.Finish = value;
+                OnPropertyChanged("Finish");
+            }
         }
 
-        #region Toolbar functionality
-        public void ExitApplication(object sender, RoutedEventArgs e)
+        public string Name
         {
-            VerifyChanges(sender, e);
-        }
-        public void MaximizeApplication(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            else
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-        }
-        public void MinimizeApplication(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            get { return subQuest.Name; }
+            set
+            {
+                subQuest.Name = value;
+                OnPropertyChanged("Name");
+            }
         }
 
-        public void Drag(object sender, MouseButtonEventArgs e)
+        public int OrderNumber
         {
-            DragMove();
+            get { return subQuest.OrderNumber; }
+            set
+            {
+                subQuest.OrderNumber = value;
+                OnPropertyChanged("OrderNumber");
+            }
         }
-        #endregion
 
-        private void VerifyChanges(object sender, RoutedEventArgs e)
+        public int SQID
+        {
+            get { return subQuest.SQID; }
+            set
+            {
+                subQuest.SQID = value;
+                OnPropertyChanged("SQID");
+            }
+        }
+
+        public EditSubQuestVM()
+        {
+            subQuest = Data.Quests[Data.QuestSelectedIndex].Subquests[Data.SubQuestSelectedIndex];
+        }
+
+        public void VerifyChanges(object sender, RoutedEventArgs e)
         {
             JObject update =
                 new JObject(
-                    new JProperty("Name", txtName.Text.ToString()),
-                    new JProperty("Description", txtDesc.Text.ToString()));
+                    new JProperty("Name", Name),
+                    new JProperty("Description", Description));
 
             var json = update.ToString();
-            Connection.EditSubQuest(LoadedSubQuest.SQID, json);
-            Close();
+            Connection.EditSubQuest(SQID, json);
         }
+
+        private void OnPropertyChanged(string s)
+        {
+            if (PropertyChanged != null)
+            {
+                var e = new PropertyChangedEventArgs(s);
+                PropertyChanged(this, e);
+            }
+        }
+
     }
 }

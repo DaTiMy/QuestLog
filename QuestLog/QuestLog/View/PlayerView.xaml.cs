@@ -15,21 +15,16 @@ using System.Windows.Shapes;
 
 namespace QuestLog
 {
-    /// <summary>
-    /// Interaction logic for PlayerView.xaml
-    /// </summary>
     public partial class PlayerView : UserControl
     {
-        public List<Quest> Quests { get; set; }
-
-
+      
         public PlayerView()
         {
             InitializeComponent();
 
-            Quests = Connection.GetQuestList(1);
+            Data.Quests = Connection.GetQuestList(1);
 
-            DataContext = Quests;
+            DataContext = Data.Quests;
         }
 
         #region Toolbar functionality
