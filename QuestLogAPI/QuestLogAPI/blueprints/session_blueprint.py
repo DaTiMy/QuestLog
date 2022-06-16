@@ -5,9 +5,7 @@ import jsonschema
 import json
 from jsonschema import validate
 
-
 session = Blueprint('session', __name__, url_prefix='/sessions')
-
 
 sessionSchema = {
 
@@ -15,22 +13,16 @@ sessionSchema = {
         "Name": {"type": "integer"},
         "Password": {"type": "string"},
         "UID": {"type": "int"},
-        "isDM":{"type": "int"}
-        
+        "isDM": {"type": "int"}
+
     },
-  "required": ["Email", "Name", "Password", "Username"]
+    "required": ["Email", "Name", "Password", "Username"]
 }
 
 
 @session.route('createsession', methods=['POST'])
 def createSession():
-
-
     content = request.json
-
-
 
     res = jsonify(success=True)
     return res
-
-

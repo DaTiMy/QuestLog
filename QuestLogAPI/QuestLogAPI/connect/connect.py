@@ -15,6 +15,6 @@ def connection():
       else:
         print(err)
     else:
-      print("connected!")
+      print("Database connected!")
 
       return cnx
