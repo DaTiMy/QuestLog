@@ -7,7 +7,7 @@ from Migration import Migration as MigrationObject
 
 def main():
     global migrations
-    files = listdir_nohidden("../migrations")
+    files = listdir_nohidden("../migrations/")
     version_list = []
     con = connection()
 
@@ -39,7 +39,7 @@ def main():
             print("Migrations incomplete!")
             print("V" + str(incomplete - 1) + " is missing!")
             exit(1)
-        files = listdir_nohidden("../migrations")
+        files = listdir_nohidden("../migrations/")
         files = sorted(files)
         for file in files:
             checksum = create_checksum(file)
