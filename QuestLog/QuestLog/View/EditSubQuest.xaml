@@ -10,7 +10,11 @@
         Width="360"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Background="Transparent">
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:EditSubQuestVM x:Name="vm"/>
+    </Window.DataContext>
     <Border BorderThickness="1" BorderBrush="#656565">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -53,7 +57,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,5">
-                <Button Margin="2" Click="VerifyChanges">
+                <Button Margin="2" Click="Confirm">
                     <Image Source="../Resources/okayIcon.png" Stretch="Fill"/>
                 </Button>
             </StackPanel>

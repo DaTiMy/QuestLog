@@ -17,21 +17,9 @@ namespace QuestLog
 {
     public partial class EditSubQuest : Window
     {
-        private SubQuest LoadedSubQuest { get; set; }
-
-        public EditSubQuest(SubQuest sq)
+        public EditSubQuest()
         {
-            LoadedSubQuest = sq;
-
             InitializeComponent();
-            
-            FillDataInitial();
-        }
-
-        private void FillDataInitial()
-        {
-            txtName.Text = LoadedSubQuest.Name.ToString();
-            txtDesc.Text = LoadedSubQuest.Description.ToString();
         }
 
         #region Toolbar functionality
@@ -57,16 +45,9 @@ namespace QuestLog
         }
         #endregion
 
-        private void VerifyChanges(object sender, RoutedEventArgs e)
+        private void Confirm(object sender, RoutedEventArgs e)
         {
-            JObject update =
-                new JObject(
-                    new JProperty("Name", txtName.Text.ToString()),
-                    new JProperty("Description", txtDesc.Text.ToString()));
 
-            var json = update.ToString();
-            Connection.EditSubQuest(LoadedSubQuest.SQID, json);
-            Close();
         }
     }
 }

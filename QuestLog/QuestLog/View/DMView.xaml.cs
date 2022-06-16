@@ -21,15 +21,13 @@ namespace QuestLog
     /// </summary>
     public partial class DMView : UserControl
     {
-        public List<Quest> Quests { get; set; }
-
         public DMView()
         {
             InitializeComponent();
 
-            Quests = Connection.GetQuestList(1);
+            Data.Quests = Connection.GetQuestList(1);
 
-            DataContext = Quests;
+            DataContext = Data.Quests;
         }
 
         #region Toolbar functionality
@@ -72,7 +70,7 @@ namespace QuestLog
             Quest q = new Quest(2, 5, false, 15, "newQuestchen", -1, -1, 59, new List<SubQuest>());
             //Datenbankanbindung
             q = Connection.AddQuest(MainWindow.Instance.SID, q);
-            Quests.Add(q);
+            Data.Quests.Add(q);
             Refresh();
         }
 
@@ -83,7 +81,7 @@ namespace QuestLog
             if (index == -1)
                 return;
 
-            EditQuest editaddWindow = new EditQuest(Quests[index]);
+            EditQuest editaddWindow = new EditQuest(Data.Quests[index]);
             editaddWindow.ShowDialog();
             QuestRefresh();
         }
@@ -95,22 +93,22 @@ namespace QuestLog
             if (index == -1)
                 return;
 
-            Connection.RemoveQuest(Quests[index].QID);
-            Quests.RemoveAt(index);
+            Connection.RemoveQuest(Data.Quests[index].QID);
+            Data.Quests.RemoveAt(index);
             Refresh();
         }
 
         //Refresh for ListView after adding or removing items
         public void Refresh()
         {
-            DataContext = Quests;
-            ICollectionView view = CollectionViewSource.GetDefaultView(Quests);
+            DataContext = Data.Quests;
+            ICollectionView view = CollectionViewSource.GetDefaultView(Data.Quests);
             view.Refresh();
         }
 
         public void QuestRefresh()
         {
-            Quests = Connection.GetQuestList(MainWindow.Instance.SID);
+            Data.Quests = Connection.GetQuestList(MainWindow.Instance.SID);
             Refresh();
         }
     }
