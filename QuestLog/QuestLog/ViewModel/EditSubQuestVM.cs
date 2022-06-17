@@ -12,66 +12,66 @@ namespace QuestLog
 {
     public class EditSubQuestVM : INotifyPropertyChanged
     {
-        private SubQuest subQuest;
+        private SubQuest SubQuest { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Description
         {
-            get { return subQuest.Description; }
+            get { return SubQuest.Description; }
             set
             {
-                subQuest.Description = value;
+                SubQuest.Description = value;
                 OnPropertyChanged("Description");
             }
         }
 
         public bool Finish
         {
-            get { return subQuest.Finish; }
+            get { return SubQuest.Finish; }
             set
             {
-                subQuest.Finish = value;
+                SubQuest.Finish = value;
                 OnPropertyChanged("Finish");
             }
         }
 
         public string Name
         {
-            get { return subQuest.Name; }
+            get { return SubQuest.Name; }
             set
             {
-                subQuest.Name = value;
+                SubQuest.Name = value;
                 OnPropertyChanged("Name");
             }
         }
 
         public int OrderNumber
         {
-            get { return subQuest.OrderNumber; }
+            get { return SubQuest.OrderNumber; }
             set
             {
-                subQuest.OrderNumber = value;
+                SubQuest.OrderNumber = value;
                 OnPropertyChanged("OrderNumber");
             }
         }
 
         public int SQID
         {
-            get { return subQuest.SQID; }
+            get { return SubQuest.SQID; }
             set
             {
-                subQuest.SQID = value;
+                SubQuest.SQID = value;
                 OnPropertyChanged("SQID");
             }
         }
 
         public EditSubQuestVM()
         {
-            subQuest = Data.Quests[Data.QuestSelectedIndex].Subquests[Data.SubQuestSelectedIndex];
+            SubQuest = Data.Quests[Data.QuestSelectedIndex].Subquests[Data.SubQuestSelectedIndex];
         }
 
-        public void VerifyChanges(object sender, RoutedEventArgs e)
+        public void VerifyChanges()
         {
             JObject update =
                 new JObject(
@@ -90,6 +90,5 @@ namespace QuestLog
                 PropertyChanged(this, e);
             }
         }
-
     }
 }

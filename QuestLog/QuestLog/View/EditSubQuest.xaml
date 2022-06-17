@@ -46,14 +46,14 @@
                 <TextBlock Text="Name Subquest:" FontSize="18" Foreground="White" Margin="10,0,0,0" TextWrapping="Wrap" Width="96"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtName" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtName" Text="{Binding Name}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
                 <TextBlock Text="Description:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtDesc" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtDesc" Text="{Binding Description}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,5">

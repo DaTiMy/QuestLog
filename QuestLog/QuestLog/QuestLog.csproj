@@ -92,7 +92,10 @@
     </ApplicationDefinition>
     <Compile Include="Model\Data.cs" />
     <Compile Include="Model\DBSubQuest.cs" />
+    <Compile Include="ViewModel\DMViewVM.cs" />
+    <Compile Include="ViewModel\EditQuestVM.cs" />
     <Compile Include="ViewModel\EditSubQuestVM.cs" />
+    <Compile Include="ViewModel\PlayerViewVM.cs" />
     <Compile Include="View\EditQuest.xaml.cs">
       <DependentUpon>EditQuest.xaml</DependentUpon>
     </Compile>

@@ -18,44 +18,16 @@ namespace QuestLog
 {
     public partial class EditQuest : Window
     {
-        private Quest LoadedQuest { get; set; }
-
-        public int SubQuestSelectedIndex
+        public EditQuest()
         {
-            get { return Data.SubQuestSelectedIndex; }
-            set 
-            {
-                Data.SubQuestSelectedIndex = value;
-                //OnPropertyChanged("SubQuestSelectedIndex");
-            }
-        }
-
-        public EditQuest(Quest q)
-        {
-            LoadedQuest = q;
-
-            if (LoadedQuest.Subquests == null)
-                LoadedQuest.Subquests = new List<SubQuest>();
-            
             InitializeComponent();
-
-            FillDataInitial();
-        }
-
-        private void FillDataInitial()
-        {
-            txtCopper.Text = LoadedQuest.Copper.ToString();
-            txtExp.Text = LoadedQuest.EXP.ToString();
-            txtGold.Text = LoadedQuest.Gold.ToString();
-            txtName.Text = LoadedQuest.Name.ToString();
-            txtSilver.Text = LoadedQuest.Silver.ToString();
-            listSubquests.DataContext = LoadedQuest.Subquests;
         }
 
         #region Toolbar functionality
         public void ExitApplication(object sender, RoutedEventArgs e)
         {
-            VerifyChanges(sender, e);
+            Confirm(sender, e);
+            Close();
         }
 
         public void MaximizeApplication(object sender, RoutedEventArgs e)
@@ -77,72 +49,25 @@ namespace QuestLog
         }
         #endregion
 
-        private void VerifyChanges(object sender, RoutedEventArgs e)
+        private void Confirm(object sender, RoutedEventArgs e)
         {
-            JObject update =
-                new JObject(
-                    new JProperty("Copper", int.Parse(txtCopper.Text)),
-                    new JProperty("EXP", int.Parse(txtExp.Text)),
-                    new JProperty("Gold", int.Parse(txtGold.Text)),
-                    new JProperty("Name", txtName.Text.ToString()),
-                    new JProperty("Silver", int.Parse(txtSilver.Text))
-                    );
-
-            var json = update.ToString();
-            Connection.EditQuest(LoadedQuest.QID, json);
+            vm.VerifyChanges(sender, e);
             Close();
         }
 
         private void AddSubQuest(object sender, RoutedEventArgs e)
         {
-            SubQuest sq = new SubQuest("new Description", false, "new Subquest", -1);
-
-            sq = Connection.AddSubQuest(LoadedQuest.QID, sq);
-            LoadedQuest.Subquests.Add(sq);
-            Refresh();
+            vm.AddSubQuest(sender, e);
         }
 
         private void EditSubQuest(object sender, RoutedEventArgs e)
         {
-            int index = listSubquests.SelectedIndex;
-
-            if (index == -1)
-                return;
-
-            EditSubQuest editSqWindow = new EditSubQuest();
-            editSqWindow.ShowDialog();
-            Refresh();
+            vm.EditSubQuest(sender, e);
         }
 
         private void RemoveSubQuest(object sender, RoutedEventArgs e)
         {
-            int index = listSubquests.SelectedIndex;
-
-            if (index == -1)
-                return;
-
-            Connection.RemoveSubQuest(LoadedQuest.Subquests[index].SQID);
-            LoadedQuest.Subquests.RemoveAt(index);
-
-            if (LoadedQuest.Subquests.Count == 0)
-                LoadedQuest.Subquests = new List<SubQuest>();
-            Refresh();
+            vm.RemoveSubQuest(sender, e);
         }
-
-        public void Refresh()
-        {
-            DataContext = LoadedQuest.Subquests;
-            ICollectionView view = CollectionViewSource.GetDefaultView(listSubquests.Items);
-            view.Refresh();
-        }
-
-        //private void OnPropertyChanged(string s)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        var e = new PropertyChangedEventArgs(s);
-        //        PropertyChanged(this, e);
-        //    }
-        //}
     }
 }

@@ -25,6 +25,7 @@ namespace QuestLog
         #region Toolbar functionality
         public void ExitApplication(object sender, RoutedEventArgs e)
         {
+            Confirm(sender, e);
             Close();
         }
         public void MaximizeApplication(object sender, RoutedEventArgs e)
@@ -47,7 +48,8 @@ namespace QuestLog
 
         private void Confirm(object sender, RoutedEventArgs e)
         {
-
+            vm.VerifyChanges();
+            Close();
         }
     }
 }

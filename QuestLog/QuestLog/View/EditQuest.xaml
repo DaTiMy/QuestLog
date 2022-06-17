@@ -11,6 +11,9 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         Background="Transparent">
+    <Window.DataContext>
+        <local:EditQuestVM x:Name="vm"/>
+    </Window.DataContext>
     <Border BorderThickness="1" BorderBrush="#656565">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -48,42 +51,42 @@
                 <TextBlock Text="Questname:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtName" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtName" Text="{Binding Name}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
                 <TextBlock Text="Copper:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtCopper" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtCopper" Text="{Binding Copper}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
                 <TextBlock Text="Experience:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtExp" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtExp" Text="{Binding EXP}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
                 <TextBlock Text="Gold:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtGold" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtGold" Text="{Binding Gold}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
                 <TextBlock Text="Silver:" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="200">
-                <TextBox x:Name="txtSilver" Text="" FontSize="16" Foreground="Black" Width="200"/>
+                <TextBox x:Name="txtSilver" Text="{Binding Silver}" FontSize="16" Foreground="Black" Width="200"/>
             </StackPanel>
 
             <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="106">
                 <TextBlock Text="Subquest(s):" FontSize="18" Foreground="White" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Grid.Row="6" Grid.Column="1" Grid.RowSpan="3" Orientation="Horizontal" Margin="17,17,17,17">
-                <ListView x:Name="listSubquests" FontSize="16" Foreground="Black" Width="200" DataContext="{Binding}" ItemsSource="{Binding}">
+                <ListView x:Name="listSubquests" FontSize="16" Foreground="Black" Width="200" SelectedIndex="{Binding SubQuestSelectedIndex}" ItemsSource="{Binding Subquests, Mode=TwoWay}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
@@ -104,7 +107,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="9" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                <Button Margin="2" Click="VerifyChanges">
+                <Button Margin="2" Click="Confirm">
                     <Image Source="../Resources/okayIcon.png" Stretch="Fill"/>
                 </Button>
             </StackPanel>

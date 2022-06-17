@@ -81,7 +81,7 @@ namespace QuestLog
             if (index == -1)
                 return;
 
-            EditQuest editaddWindow = new EditQuest(Data.Quests[index]);
+            EditQuest editaddWindow = new EditQuest();
             editaddWindow.ShowDialog();
             QuestRefresh();
         }
