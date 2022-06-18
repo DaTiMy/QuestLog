@@ -14,7 +14,8 @@ namespace QuestLog
 {
     public class EditQuestVM : INotifyPropertyChanged
     {
-        public Quest LoadedQuest { get; set; }
+        //Model
+        private Quest LoadedQuest { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -113,7 +114,7 @@ namespace QuestLog
             get { return LoadedQuest.Subquests; }
             set
             {
-                LoadedQuest.Subquests = (List<SubQuest>) value.Cast<List<SubQuest>>();
+                LoadedQuest.Subquests = value;
                 OnPropertyChanged("Subquests");
             }
         }
@@ -123,7 +124,7 @@ namespace QuestLog
             LoadedQuest = Data.Quests[Data.QuestSelectedIndex];
 
             if (Subquests == null)
-                Subquests = new List<SubQuest>();
+                Subquests = new ObservableCollection<SubQuest>();
         }
 
         public void VerifyChanges(object sender, RoutedEventArgs e)
@@ -147,7 +148,6 @@ namespace QuestLog
 
             sq = Connection.AddSubQuest(QID, sq);
             Subquests.Add(sq);
-            //Refresh();
         }
 
         public void EditSubQuest(object sender, RoutedEventArgs e)
@@ -155,9 +155,8 @@ namespace QuestLog
             if (Data.SubQuestSelectedIndex == -1)
                 return;
 
-            EditSubQuest editSqWindow = new EditSubQuest();
-            editSqWindow.ShowDialog();
-            //Refresh();
+            new EditSubQuest().ShowDialog();
+            //Server response here | Subquests[Data.SubQuestSelectedIndex] = sq;
         }
 
         public void RemoveSubQuest(object sender, RoutedEventArgs e)
@@ -169,7 +168,7 @@ namespace QuestLog
             Subquests.RemoveAt(Data.SubQuestSelectedIndex);
 
             if (Subquests.Count == 0)
-                Subquests = new List<SubQuest>();
+                Subquests = new ObservableCollection<SubQuest>();
             //Refresh();
         }
 

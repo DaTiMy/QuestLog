@@ -6,6 +6,9 @@
         xmlns:src="clr-namespace:QuestLog"
         mc:Ignorable="d"
         Height="600" Width="450">
+    <UserControl.DataContext>
+        <src:DMViewVM x:Name="vm"/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <!--Local DynamicResource-->
         <Color x:Key="GreyE1">#FF181818</Color>
@@ -36,9 +39,9 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Background}"/>
         </Grid.Background>
-        <ListView x:Name="QuestView" ItemsSource="{Binding}" 
+        <ListView x:Name="QuestView" ItemsSource="{Binding Quests}"
                   ScrollViewer.CanContentScroll="False" Foreground="{x:Null}" Margin="25,25,25,25"
-                  Grid.RowSpan="1" Grid.Row="0">
+                  Grid.RowSpan="1" Grid.Row="0" SelectedIndex="{Binding SelectedQuestIndex}">
             <ListView.Background>
                 <SolidColorBrush Color="{DynamicResource GreyE1}"/>
             </ListView.Background>

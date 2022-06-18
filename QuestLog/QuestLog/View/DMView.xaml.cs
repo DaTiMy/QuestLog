@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -24,10 +25,6 @@ namespace QuestLog
         public DMView()
         {
             InitializeComponent();
-
-            Data.Quests = Connection.GetQuestList(1);
-
-            DataContext = Data.Quests;
         }
 
         #region Toolbar functionality
@@ -55,61 +52,27 @@ namespace QuestLog
 
         public void CheckedQuest(object sender, RoutedEventArgs e)
         {
-            int qid = ((sender as CheckBox).DataContext as Quest).QID;
-            Connection.FinishQuest(qid);
+            vm.CheckedQuest(sender, e);
         }
 
         public void CheckedSubQuest(object sender, RoutedEventArgs e)
         {
-            int sqid = ((sender as CheckBox).DataContext as SubQuest).SQID;
-            Connection.FinishSubQuest(sqid);
+            vm.CheckedSubQuest(sender, e);
         }
 
         public void AddQuest(object sender, RoutedEventArgs e)
         {
-            Quest q = new Quest(2, 5, false, 15, "newQuestchen", -1, -1, 59, new List<SubQuest>());
-            //Datenbankanbindung
-            q = Connection.AddQuest(MainWindow.Instance.SID, q);
-            Data.Quests.Add(q);
-            Refresh();
+            vm.AddQuest(sender, e);
         }
 
         public void EditQuest(object sender, RoutedEventArgs e)
         {
-            int index = QuestView.SelectedIndex;
-
-            if (index == -1)
-                return;
-
-            EditQuest editaddWindow = new EditQuest();
-            editaddWindow.ShowDialog();
-            QuestRefresh();
+            vm.EditQuest(sender, e);
         }
 
         public void RemoveQuest(object sender, RoutedEventArgs e)
         {
-            int index = QuestView.SelectedIndex;
-
-            if (index == -1)
-                return;
-
-            Connection.RemoveQuest(Data.Quests[index].QID);
-            Data.Quests.RemoveAt(index);
-            Refresh();
-        }
-
-        //Refresh for ListView after adding or removing items
-        public void Refresh()
-        {
-            DataContext = Data.Quests;
-            ICollectionView view = CollectionViewSource.GetDefaultView(Data.Quests);
-            view.Refresh();
-        }
-
-        public void QuestRefresh()
-        {
-            Data.Quests = Connection.GetQuestList(MainWindow.Instance.SID);
-            Refresh();
+            vm.RemoveQuest(sender, e);
         }
     }
 }

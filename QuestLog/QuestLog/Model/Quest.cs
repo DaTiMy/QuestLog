@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,9 +37,9 @@ namespace QuestLog
         public int Silver { get; set; }
 
         [JsonProperty("subquests")]
-        public List<SubQuest> Subquests { get; set; }
+        public ObservableCollection<SubQuest> Subquests { get; set; }
 
-        public Quest(int copper, int exp, bool finish, int gold, string name, int orderNumber, int qid, int silver, List<SubQuest> subquests)
+        public Quest(int copper, int exp, bool finish, int gold, string name, int orderNumber, int qid, int silver, ObservableCollection<SubQuest> subquests)
         {
             Copper = copper;
             EXP = exp;

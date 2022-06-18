@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,7 +14,7 @@ namespace QuestLog
 {
     internal static class Connection
     {
-        public static List<Quest> GetQuestList(int SID)
+        public static ObservableCollection<Quest> GetQuestList(int SID)
         {
             string json = "";
 
@@ -22,7 +23,7 @@ namespace QuestLog
                 json = wc.DownloadString("https://mdvca3qr4u.eu-west-1.awsapprunner.com/quests/select/sid/" + SID);
             }
 
-            List<Quest> quests = JsonConvert.DeserializeObject<List<Quest>>(json);
+            ObservableCollection<Quest> quests = JsonConvert.DeserializeObject<ObservableCollection<Quest>>(json);
 
             return quests;
         }
