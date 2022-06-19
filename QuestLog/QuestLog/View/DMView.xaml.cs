@@ -68,6 +68,7 @@ namespace QuestLog
         public void EditQuest(object sender, RoutedEventArgs e)
         {
             vm.EditQuest(sender, e);
+
         }
 
         public void RemoveQuest(object sender, RoutedEventArgs e)

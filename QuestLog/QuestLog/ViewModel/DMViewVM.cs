@@ -36,6 +36,7 @@ namespace QuestLog
 
         public DMViewVM()
         {
+            //insert sid here, passed from session
             Data.Quests = Connection.GetQuestList(1);
         }
 
@@ -64,6 +65,7 @@ namespace QuestLog
                 return;
 
             new EditQuest().ShowDialog();
+            Data.QuestRefresh();
         }
 
         public void RemoveQuest(object sender, RoutedEventArgs e)
@@ -83,19 +85,5 @@ namespace QuestLog
                 PropertyChanged(this, e);
             }
         }
-
-        ////Refresh for ListView after adding or removing items
-        //public void Refresh()
-        //{
-        //    DataContext = Data.Quests;
-        //    ICollectionView view = CollectionViewSource.GetDefaultView(Data.Quests);
-        //    view.Refresh();
-        //}
-
-        //public void QuestRefresh()
-        //{
-        //    Data.Quests = Connection.GetQuestList(MainWindow.Instance.SID);
-        //    Refresh();
-        //}
     }
 }

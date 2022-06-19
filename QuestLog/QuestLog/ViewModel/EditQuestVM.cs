@@ -156,6 +156,7 @@ namespace QuestLog
                 return;
 
             new EditSubQuest().ShowDialog();
+            LoadedQuest.SubQuestRefresh();
             //Server response here | Subquests[Data.SubQuestSelectedIndex] = sq;
         }
 
@@ -171,13 +172,6 @@ namespace QuestLog
                 Subquests = new ObservableCollection<SubQuest>();
             //Refresh();
         }
-
-        //public void Refresh()
-        //{
-        //    DataContext = LoadedQuest.Subquests;
-        //    ICollectionView view = CollectionViewSource.GetDefaultView(listSubquests.Items);
-        //    view.Refresh();
-        //}
 
         private void OnPropertyChanged(string s)
         {

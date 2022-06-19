@@ -6,6 +6,9 @@
         xmlns:src="clr-namespace:QuestLog"
         mc:Ignorable="d"
         Height="600" Width="450">
+    <UserControl.DataContext>
+        <src:PlayerViewVM x:Name="vm"/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <!--Local DynamicResource-->
         <Color x:Key="GreyE1">#FF181818</Color>
@@ -32,8 +35,9 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Background}"/>
         </Grid.Background>
-        <ListView x:Name="QuestView" Width="400" Height="550" ItemsSource="{Binding}" 
-                  ScrollViewer.CanContentScroll="False" Foreground="{x:Null}">
+        <ListView x:Name="QuestView" ItemsSource="{Binding Quests}"
+                  ScrollViewer.CanContentScroll="False" Foreground="{x:Null}" Margin="25,25,25,25"
+                  Grid.RowSpan="1" Grid.Row="0">
             <ListView.Background>
                 <SolidColorBrush Color="{DynamicResource GreyE1}"/>
             </ListView.Background>
@@ -58,7 +62,7 @@
                                         <SolidColorBrush Color="#FFAAAAAA"/>
                                     </Border.BorderBrush>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0" IsChecked="{Binding Finish}" Click="CheckedSubQuest" IsEnabled="False"/>
+                                        <CheckBox x:Name="CheckSubQuest" VerticalAlignment="Center" Margin="5, 0, 0, 0" IsChecked="{Binding Finish}" Click="CheckedSubQuest"/>
                                         <TextBlock Text="{Binding Name}" Foreground="White" Width="275"  Padding="10, 2, 2, 2" FontSize="18"
                                                    ToolTip="{Binding Description}" ToolTipService.ShowDuration="5000">
                                             <!--Strikethrough bei Checked SubQuest-->
@@ -105,7 +109,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest" IsEnabled="False">
+                            <CheckBox x:Name="CheckQuest" Margin="-35, 5, 0, 0" IsChecked="{Binding Finish}" Click="CheckedQuest">
                                 <CheckBox.LayoutTransform>
                                     <ScaleTransform ScaleX="2" ScaleY="2" />
                                 </CheckBox.LayoutTransform>

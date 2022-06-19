@@ -21,10 +21,6 @@ namespace QuestLog
         public PlayerView()
         {
             InitializeComponent();
-
-            Data.Quests = Connection.GetQuestList(1);
-
-            DataContext = Data.Quests;
         }
 
         #region Toolbar functionality

@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace QuestLog
 {   
@@ -50,6 +52,12 @@ namespace QuestLog
             QID = qid;
             Silver = silver;
             Subquests = subquests;
+        }
+
+        public void SubQuestRefresh()
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(Subquests);
+            view.Refresh();
         }
     }
 }
