@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\
 QuestLog
 none
 false
 DEBUG;TRACE
-C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\App.xaml
-51226390598
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\App.xaml
+6-1205593758
 
-20-230573037
-272003503653
-View\EditQuest.xaml;View\EditSubQuest.xaml;View\MainWindow.xaml;View\DMView.xaml;View\PlayerView.xaml;
+211993887923
+27-1943332511
+View\EditQuest.xaml;View\EditSubQuest.xaml;View\MainWindow.xaml;View\DMView.xaml;View\PlayerView.xaml;View\Register.xaml;
 
-False
+True
 

@@ -78,18 +78,10 @@ namespace QuestLog
         {
             Application.Current.MainWindow.Close();
         }
-        public void MaximizeApplication(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            else
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-        }
         public void MinimizeApplication(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
-
         public void Drag(object sender, MouseButtonEventArgs e)
         {
             DragMove();

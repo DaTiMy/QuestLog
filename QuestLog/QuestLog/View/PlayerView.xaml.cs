@@ -23,29 +23,6 @@ namespace QuestLog
             InitializeComponent();
         }
 
-        #region Toolbar functionality
-        public void ExitApplication(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.Close();
-        }
-        public void MaximizeApplication(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            else
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-        }
-        public void MinimizeApplication(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
-        }
-
-        public void Drag(object sender, MouseButtonEventArgs e)
-        {
-            MainWindow.Instance.DragMove();
-        }
-        #endregion
-
         public void CheckedQuest(object sender, RoutedEventArgs e)
         {
             int qid = ((sender as CheckBox).DataContext as Quest).QID;

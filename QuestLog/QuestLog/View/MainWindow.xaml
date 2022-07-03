@@ -8,9 +8,10 @@
         Title="QuestLog"
         Height="620"
         Width="450"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         WindowStyle="None"
-        Background="Transparent">
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
     <Border BorderThickness="1" BorderBrush="#656565">
         <Grid>
             <Grid.Background>
@@ -28,7 +29,6 @@
             <Border Grid.ColumnSpan="2" Background="Transparent" MouseDown="Drag"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="20" Background="Transparent" Content="🗕" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MinimizeApplication"/>
-                <Button Width="20" Background="Transparent" Content="🗖" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MaximizeApplication"/>
                 <Button Width="20" Background="DarkRed" Content="✖" Foreground="#181818" BorderThickness="0" Click="ExitApplication" />
             </StackPanel>
 

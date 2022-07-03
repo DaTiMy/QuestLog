@@ -10,7 +10,8 @@
         Width="360"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Background="Transparent">
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:EditQuestVM x:Name="vm"/>
     </Window.DataContext>
@@ -41,9 +42,7 @@
             <Border Background="#181818" Grid.ColumnSpan="2"/>
             <TextBlock Text="Edit/Add Quest" Foreground="DarkGray" VerticalAlignment="Center" Margin="15,0,0,0" Height="16" Grid.ColumnSpan="2"/>
             <Border Background="Transparent" MouseDown="Drag" Grid.ColumnSpan="2"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="174,0,0,0" Width="60" Grid.Column="1">
-                <Button Width="20" Background="Transparent" Content="🗕" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MinimizeApplication"/>
-                <Button Width="20" Background="Transparent" Content="🗖" VerticalContentAlignment="Stretch" Foreground="DarkGray" BorderThickness="0" Click="MaximizeApplication"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                 <Button Width="20" Background="DarkRed" Content="✖" Foreground="#181818" BorderThickness="0" Click="ExitApplication" />
             </StackPanel>
 
@@ -100,7 +99,7 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Grid.Row="9" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,5,15,5">
                 <Button Margin="2" Click="Confirm">
                     <Image Source="../Resources/okayIcon.png" Stretch="Fill"/>
                 </Button>

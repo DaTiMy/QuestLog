@@ -96,3 +96,5 @@ C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.baml
 C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.g.cs
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.baml
 C:\Users\marko\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\App.g.cs
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\Register.g.cs
+C:\Users\stud\Documents\GitHub\QuestLog\QuestLog\QuestLog\obj\Debug\View\Register.baml
